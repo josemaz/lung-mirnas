@@ -1,0 +1,26 @@
+{
+"content": [
+  {
+    "content": {
+      "field": "cases.submitter_id",
+      "value": "dummy"
+    },
+    "op": "in"
+  },
+  {
+    "content": {
+      "field": "files.access",
+      "value": ["open"]
+    },
+    "op": "in"
+  },
+  {
+    "content": {
+      "field": "files.data_type",
+      "value": ["miRNA Expression Quantification"]
+    },
+    "op": "in"
+  }
+],
+"op": "and"
+}

@@ -1,0 +1,12 @@
+{
+  "content": [
+    {
+      "content": {
+        "field": "files.file_id",
+        "value": "dummy"
+      },
+      "op": "in"
+    }
+	],
+  "op": "and"
+}
