@@ -6,7 +6,7 @@ Sys.umask("003")
 DATADIR <- 'pipeline/data/'
 RDATA <- paste(DATADIR, "rdata", sep="")
 dir.create(RDATA)
-cat('Data directory: ', DATADIR, '\n')
+cat('Data directory: ', DATADIR, '\n') #concatena e imprime
 
 ###############################################################################
 ##Usefull Libraries
@@ -31,13 +31,15 @@ register(MulticoreParam(workers=detectCores()-1, progress=TRUE))#Linux
 normdir <- 'Data/Control/RNAseq'
 cat('Checking normal samples \n')
 cases <- read.table(paste(normdir, "db.csv", sep="/"),header=F,sep=",")
-cases$V2 <- gsub(".{3}$", "", cases$V2)
+cases$V2 <- gsub(".{3}$", "", cases$V2) #Sustitucion de todos los matches de un string
 cases$V2 <- paste(normdir,cases$V2, sep="/")
 cat('Normal directory: ', normdir, '\n')
-normal<-bplapply(cases$V2, read.delim, sep="\t", header=F, col.names=c("EnsemblID", "raw_counts"))
+normal<-bplapply(cases$V2, read.delim, sep="\t", header=F, col.names=c("EnsemblID", "raw_counts")) #bplapply - Aplica la funcion read.delim para cada elemento de cases$ V2
+#read-delim - lee archivos de texto donde filas-casos & columnas-muesstras
 
 ##Check if all samples have the same size
-size<-unique(do.call(rbind,lapply(normal, dim)))
+size<-unique(do.call(rbind,lapply(normal, dim))) #do.call-Construye y ejecuta una llamada de función;dim-Da la dimension
+#unique -Regresa el mismo array pero con elementos duplicados o eliminados
 stopifnot(nrow(size)==1)
 cat('Normal samples have the same size \n')
 

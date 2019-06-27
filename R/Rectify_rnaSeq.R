@@ -1,7 +1,7 @@
 ###############################################################################
 ##Get the Work and Data dir
 ###############################################################################
-setwd("/home/kevinml/Documentos/INMEGEN/lung-mirnas/Database/")
+setwd("/home/kevinml/Documentos/INMEGEN/lung-mirnas/Database/") #ruta donde este la carpeta Database
 Sys.umask("003")                                                            
 RDATA <- "rdata"
 dir.create(RDATA)
@@ -27,7 +27,7 @@ register(MulticoreParam(workers=detectCores()-1, progress=TRUE))#Linux
 
 ##########################
 ## Control - NAD
-normdir <- '/home/kevinml/Documentos/INMEGEN/lung-mirnas/Database/NAD/RNAseq/'
+normdir <- '/home/kevinml/Documentos/INMEGEN/lung-mirnas/Database/NAD/RNAseq/' #ruta donde este el archivo index.txt
 cat('Checking normal samples \n')
 cases <- read.table(paste(normdir,"index.txt", sep =""), header=F, sep='\t') #index.txt ahora es cases
 cases$V2 <- gsub(".{3}$", "", cases$V2) #Sustitucion de todos los matches de un string
@@ -56,6 +56,7 @@ colnames(normal)<-targets$ID #normal tiene muchas columnas, donde cada columna e
 ##Let's change the annotation 
 genes<-do.call(rbind,sapply(genes[,1], strsplit, split=".", fixed=TRUE))
 colnames(genes)<-c("EnsemblID", "version") # genes es un dataframe de 2 columnas, en la primera esta el ensemble ID y en la otra la verison
+write.table(genes[,"EnsemblID"], "ensembleIDs_Normal.tsv", sep="\t", row.names = FALSE) #Se hace un archivo con los ensemble IDs
 
 ##Save clean data
 normal<-list(Counts=normal, Annot=genes, targets=targets)
@@ -72,7 +73,7 @@ cat('NormalRaw.RData saved \n')
 ##      -Let's change the annotation 
 ##      -Save clean data
 ##############################################################################
-casedir <- '/home/kevinml/Documentos/INMEGEN/lung-mirnas/Database/TAD/RNAseq/'
+casedir <- '/home/kevinml/Documentos/INMEGEN/lung-mirnas/Database/TAD/RNAseq/' #ruta donde este el archivo index.txt
 ##########################
 ## TAD
 cases <- read.table(paste(casedir, "index.txt", sep=""),header=F,sep="\t")
@@ -100,6 +101,7 @@ colnames(cancer)<-targets$ID
 ##Let's change the annotation 
 genes<-do.call(rbind,sapply(genes[,1], strsplit, split=".", fixed=TRUE))
 colnames(genes)<-c("EnsemblID", "version")
+write.table(genes[,"EnsemblID"], "ensembleIDs_Cancer.tsv", sep="\t", row.names = FALSE)
 
 ##Save clean data
 cancer<-list(Counts=cancer, Annot=genes, targets=targets)
@@ -117,8 +119,9 @@ cat('CancerRaw.RData saved \n')
 ###############################################################################
 ## Read the file
 cat('Working with annotation file: biomart-20181212.txt \n')
-annot<-read.delim(file="pipeline/biomart-20181212.txt", sep="\t")
+annot<-read.delim(file="biomart-20181212.txt", sep="\t")
 
+#names(annot)<-c("EnsemblID", "Start", "End", "GC", "Type", "Chr", "Band")
 names(annot)<-c("EnsemblID", "Chr", "Start", "End", "GC", "Type")
 annot$Length<-abs(annot$End - annot$Start)
 
@@ -127,8 +130,8 @@ head(annot)
 
 ##Remove not conventional chromosomes
 annot<-as.data.frame(annot)
-levels(annot$Chr)
-annot<-annot[annot$Chr%in%c(as.character(1:22), "X", "Y"),]
+levels(annot$Chr) #arroja los valores unicos, cromosomas unicos
+annot<-annot[annot$Chr%in%c(as.character(1:22), "X", "Y"),] #Solo se dejan aquellos cromosomas del1 al 22 y los sexuales
 annot$Chr<-droplevels(annot$Chr)
 cat('Non conventional chromosomes removed \n')
 
@@ -164,17 +167,14 @@ cat('annot.RData saved \n')
 cat('Merging counts and annotations \n')
 load(file=paste(RDATA, "annot.RData", sep="/"))
 load(file=paste(RDATA, "NormalRaw.RData", sep="/"))
-load(file=paste(RDATA, "BasalRaw.RData", sep="/"))
-load(file=paste(RDATA, "LumARaw.RData", sep="/"))
-load(file=paste(RDATA, "LumBRaw.RData", sep="/"))
-load(file=paste(RDATA, "Her2Raw.RData", sep="/"))
+load(file=paste(RDATA, "CancerRaw.RData", sep="/"))
 
 ##M=normal|tumor
-M<-cbind(normal$Counts, Basal$Counts, LumA$Counts, LumB$Counts, Her2$Counts)
+M<-cbind(normal$Counts, cancer$Counts)
 cat('Total number of features and samples: ', paste(dim(M), collapse=" ,"), '\n')
 
 ##targets=normal+tumor
-targets<-rbind(normal$targets, Basal$targets, LumA$targets, LumB$targets, Her2$targets)
+targets<-rbind(normal$targets, cancer$targets)
 targets<-data.frame(targets, stringsAsFactors=FALSE)
 targets$File<-as.character(targets$File)
 targets$ID<-as.character(targets$ID)
@@ -186,10 +186,8 @@ cat('Number of counts columns match sample number\n')
 
 ## Annot=genes|annot
 ## check if genes from normal and tumor match
-stopifnot(normal$Annot==Basal$Annot)
-stopifnot(normal$Annot==LumA$Annot)
-stopifnot(normal$Annot==LumB$Annot)
-stopifnot(normal$Annot==Her2$Annot)
+stopifnot(normal$Annot==cancer$Annot)
+
 cat('Genes from normal and tumor samples match \n')
 
 Annot<-normal$Annot
