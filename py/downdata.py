@@ -15,8 +15,9 @@ dirname = sys.argv[1]
 db = pd.read_csv("../Data/" + dirname + "-mirna.tsv", sep='\t')
 db = db[db.mirna_count != 0]
 
+os.chdir('../Data/')
 do_file(dirname)
-os.chdir('../Data/' + dirname)
+os.chdir(dirname)
 
 do_file('RNAseq')
 
