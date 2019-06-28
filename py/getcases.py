@@ -1,7 +1,9 @@
 import json, requests, io
 import pandas as pd
 
-fileids = pd.read_csv("../Database/TAD.txt", sep='\t')
+
+filename = sys.argv[1]
+fileids = pd.read_csv("../Database/" + filename + ".txt", sep='\t')
 
 cases = []
 fids = []
@@ -30,5 +32,5 @@ for index, row in fileids.iterrows():
 	print(df.iloc[0]['cases.0.submitter_id'])
 
 df = pd.DataFrame({"case": cases, "fid": fids})
-df.to_csv("../Data/TAD-cases.tsv", sep="\t", index = False)
+df.to_csv("../Data/" + filename + "-cases.tsv", sep="\t", index = False)
 

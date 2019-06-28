@@ -1,8 +1,10 @@
 import json, requests, io
 import pandas as pd
 import numpy as np
+import sys
 
-cases = pd.read_csv("../Data/NAD-cases.tsv", sep='\t')
+filename = sys.argv[1]
+cases = pd.read_csv("../Data/" + filename + "-cases.tsv", sep='\t')
 mirna_fid = []
 mirna_fname = []
 mirna_count = []
@@ -39,7 +41,7 @@ cases['mirna_fname'] = mirna_fname
 cases['mirna_fid'] = mirna_fid
 cases.rename(columns={'fid':'rnaseq_fid'}, inplace = True)
 
-cases.to_csv("../Data/NAD-mirna.tsv", sep="\t", index = False)
+cases.to_csv("../Data/" + filename + "-mirna.tsv", sep="\t", index = False)
 
 
 # print(cases)
