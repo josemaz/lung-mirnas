@@ -35,6 +35,18 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón
  - R (version chingona)
  - librerias
 
+## Descarga de los datos
+   1. `python getcases.py TSC` [Breve descripcion]
+   2. `python getcases.py NAD`
+   ...
+   3. `python casemirna.py NAD`
+   4. `python casemirna.py TAD`
+   ...
+   4. `python casemirna.py TAD`
+
+## Control de calidad y normalizacion
+   1. 
+
 ## Descarga
  
  - __getcases.py__
@@ -51,3 +63,4 @@ Una vez con los archivos anteriores se ejecuta el "script 4: file_number.txt" & 
 Se ejecuta el "script 3: downdata.py" para descargar de TCGA los archivos con las raw counts de RNASeq y de miRNASeq y generar el archivo "index.txt" con un listado de los archivos descargados.
 
 Se ejecuta el script de R "Rectify_rnaSeq.R" para manejar datos.
+
