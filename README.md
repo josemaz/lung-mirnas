@@ -1,22 +1,22 @@
 # lung-mirnas
 Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón
 
-## CONTENIDO DE CARPETAS
+## Contenido deCarpetas
 
-- Database (4 files)
+- **Database (12 files)**    
    Esta carpeta es **fija** y contine los archivos originales de cancer de pulmon 
-   (NAD.txt, TAD.txt, NSC.txt, TSC.txt).
+   (listar archivos manifest).
 
-- Data (12 files)
-   Contiene de NAD,TAD,NSC & TSC, 2 archivos de c/u. El ".*.txt" es un archivo manifest, el ".*-cases.tsv" contiene el caseID y el fid, el ".*-mirna.tsv" contiene caseID, rnaseq_fid, cantidad de mirnas, mirna_fname y el mirna_fid
+- **Data (12 files)**  
+   Contiene de NAD,TAD,NSC & TSC, 3 archivos de c/u. El ".*.txt" es un archivo manifest, el ".*-cases.tsv" contiene el caseID y el fid, el ".*-mirna.tsv" contiene caseID, rnaseq_fid, cantidad de mirnas, mirna_fname y el mirna_fid
 
-- R (2 files)
+- **R (2 files)**  
    Tiene script para el manejo de RNASeq raw counts
 
-- json (2 files)
+- **json (2 files)**  
    Tiene un archivo con el que se hizo el query a TCGA y obtener los CaseID a partir de los manifest;  Tiene otro archivo para hacer un query a TCGA y obtener rnaseq_fid, cantidad de mirnas, mirna_fname y el mirna_fid a partir de los CaseID
 
-- py (6 files)
+- **py (6 files)**  
    - Util.py: Libreria creada para el download de informacion
    - casemirna.py: Script para obtener rnaseq_fid, cantidad de mirnas, mirna_fname y el mirna_fid a partir de los CaseID
 - script 3: downdata.py   
@@ -37,7 +37,7 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón
 
 ## Descarga
  
- - \getcases.py\ italicas 
+ - __getcases.py__
  
  
 Se partio de archivos manifest.   
