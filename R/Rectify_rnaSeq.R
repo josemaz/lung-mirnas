@@ -1,7 +1,7 @@
 ###############################################################################
 ##Get the Work and Data dir
 ###############################################################################
-setwd("/home/kevinml/Documentos/INMEGEN/lung-mirnas/Database/") #ruta donde este la carpeta Database
+setwd("/home/kevinml/Documentos/INMEGEN/lung-mirnas/Data/") #ruta donde este la carpeta Data
 Sys.umask("003")                                                            
 RDATA <- "rdata"
 dir.create(RDATA)
@@ -27,7 +27,7 @@ register(MulticoreParam(workers=detectCores()-1, progress=TRUE))#Linux
 
 ##########################
 ## Control - NAD
-normdir <- '/home/kevinml/Documentos/INMEGEN/lung-mirnas/Database/NAD/RNAseq/' #ruta donde este el archivo index.txt
+normdir <- '/home/kevinml/Documentos/INMEGEN/lung-mirnas/Data/NAD/RNAseq/' #ruta donde este el archivo index.txt
 cat('Checking normal samples \n')
 cases <- read.table(paste(normdir,"index.txt", sep =""), header=F, sep='\t') #index.txt ahora es cases
 cases$V2 <- gsub(".{3}$", "", cases$V2) #Sustitucion de todos los matches de un string
@@ -73,7 +73,7 @@ cat('NormalRaw.RData saved \n')
 ##      -Let's change the annotation 
 ##      -Save clean data
 ##############################################################################
-casedir <- '/home/kevinml/Documentos/INMEGEN/lung-mirnas/Database/TAD/RNAseq/' #ruta donde este el archivo index.txt
+casedir <- '/home/kevinml/Documentos/INMEGEN/lung-mirnas/Data/TAD/RNAseq/' #ruta donde este el archivo index.txt
 ##########################
 ## TAD
 cases <- read.table(paste(casedir, "index.txt", sep=""),header=F,sep="\t")

@@ -20,3 +20,5 @@ def download(fid):
 	if fext == ".gz":
 		cmd = "gunzip " + file_name
 		os.system(cmd)
+
+	return(file_name)

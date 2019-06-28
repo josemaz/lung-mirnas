@@ -1,7 +1,7 @@
 import json, requests, io
 import pandas as pd
 
-fileids = pd.read_csv("../Data/TAD.txt", sep='\t')
+fileids = pd.read_csv("../Database/TAD.txt", sep='\t')
 
 cases = []
 fids = []

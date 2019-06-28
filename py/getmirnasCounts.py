@@ -5,10 +5,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #abrimos los archivos
-file1 = pd.read_csv("../Database/NAD-mirna.tsv", sep="\t")
-file2 = pd.read_csv("../Database/NSC-mirna.tsv", sep="\t")
-file3 = pd.read_csv("../Database/TAD-mirna.tsv", sep="\t")
-file4 = pd.read_csv("../Database/TSC-mirna.tsv", sep="\t")
+file1 = pd.read_csv("../Data/NAD-mirna.tsv", sep="\t")
+file2 = pd.read_csv("../Data/NSC-mirna.tsv", sep="\t")
+file3 = pd.read_csv("../Data/TAD-mirna.tsv", sep="\t")
+file4 = pd.read_csv("../Data/TSC-mirna.tsv", sep="\t")
 
 all_mirnas = []
 all_mirnas.append(list(file1["mirna_count"]))

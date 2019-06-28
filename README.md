@@ -3,12 +3,12 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón
 
 ## CONTENIDO DE CARPETAS
 
-- Database (12 files)
+- Database (4 files)
    Esta carpeta es **fija** y contine los archivos originales de cancer de pulmon 
-   (listar archivos manifest).
+   (NAD.txt, TAD.txt, NSC.txt, TSC.txt).
 
 - Data (12 files)
-   Contiene de NAD,TAD,NSC & TSC, 3 archivos de c/u. El ".*.txt" es un archivo manifest, el ".*-cases.tsv" contiene el caseID y el fid, el ".*-mirna.tsv" contiene caseID, rnaseq_fid, cantidad de mirnas, mirna_fname y el mirna_fid
+   Contiene de NAD,TAD,NSC & TSC, 2 archivos de c/u. El ".*.txt" es un archivo manifest, el ".*-cases.tsv" contiene el caseID y el fid, el ".*-mirna.tsv" contiene caseID, rnaseq_fid, cantidad de mirnas, mirna_fname y el mirna_fid
 
 - R (2 files)
    Tiene script para el manejo de RNASeq raw counts
