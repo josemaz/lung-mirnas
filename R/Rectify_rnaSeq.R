@@ -1,11 +1,12 @@
 ###############################################################################
 ##Get the Work and Data dir
 ###############################################################################
-setwd("/home/kevinml/Documentos/INMEGEN/lung-mirnas/Data/") #ruta donde este la carpeta Data
-Sys.umask("003")                                                            
-RDATA <- "rdata"
+setwd("../Data/") #ruta donde este la carpeta Data
+Sys.umask("003")
+DATADIR <- 'pipeline/data/'
+RDATA <- paste(DATADIR, "rdata", sep="")
 dir.create(RDATA)
-cat('Data directory: ', RDATA, '\n') #concatena e imprime
+cat('Data directory: ', DATADIR, '\n') #concatena e imprime
 
 ###############################################################################
 ##Usefull Libraries
@@ -27,7 +28,7 @@ register(MulticoreParam(workers=detectCores()-1, progress=TRUE))#Linux
 
 ##########################
 ## Control - NAD
-normdir <- '/home/kevinml/Documentos/INMEGEN/lung-mirnas/Data/NAD/RNAseq/' #ruta donde este el archivo index.txt
+normdir <- './NAD/RNAseq/' #ruta donde este el archivo index.txt
 cat('Checking normal samples \n')
 cases <- read.table(paste(normdir,"index.txt", sep =""), header=F, sep='\t') #index.txt ahora es cases
 cases$V2 <- gsub(".{3}$", "", cases$V2) #Sustitucion de todos los matches de un string
@@ -73,7 +74,7 @@ cat('NormalRaw.RData saved \n')
 ##      -Let's change the annotation 
 ##      -Save clean data
 ##############################################################################
-casedir <- '/home/kevinml/Documentos/INMEGEN/lung-mirnas/Data/TAD/RNAseq/' #ruta donde este el archivo index.txt
+casedir <- './TAD/RNAseq/' #ruta donde este el archivo index.txt
 ##########################
 ## TAD
 cases <- read.table(paste(casedir, "index.txt", sep=""),header=F,sep="\t")
@@ -119,7 +120,7 @@ cat('CancerRaw.RData saved \n')
 ###############################################################################
 ## Read the file
 cat('Working with annotation file: biomart-20181212.txt \n')
-annot<-read.delim(file="biomart-20181212.txt", sep="\t")
+annot<-read.delim(file="pipeline/biomart-20181212.txt", sep="\t")
 
 #names(annot)<-c("EnsemblID", "Start", "End", "GC", "Type", "Chr", "Band")
 names(annot)<-c("EnsemblID", "Chr", "Start", "End", "GC", "Type")
