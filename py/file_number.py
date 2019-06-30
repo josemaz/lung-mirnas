@@ -3,18 +3,18 @@ import glob
 import numpy as np
 
 #Se cuenta la cantidad de archivos
-no_NAD_mirnas = len(glob.glob("../Data/NAD/miRNA/*.txt")) - 1
-no_NAD_rnas = len(glob.glob("../Data/NAD/RNAseq/*.counts")) - 1
+no_NAD_mirnas = len(glob.glob("Data/NAD/miRNA/*.txt")) - 1
+no_NAD_rnas = len(glob.glob("Data/NAD/RNAseq/*.counts")) - 1
 
-no_NSC_mirnas = len(glob.glob("../Data/NSC/miRNA/*.txt")) - 1
-no_NSC_rnas = len(glob.glob("../Data/NSC/RNAseq/*.counts")) - 1
+no_NSC_mirnas = len(glob.glob("Data/NSC/miRNA/*.txt")) - 1
+no_NSC_rnas = len(glob.glob("Data/NSC/RNAseq/*.counts")) - 1
 
 #Tejido canceroso
-no_TAD_mirnas = len(glob.glob("../Data/TAD/miRNA/*.txt")) - 1
-no_TAD_rnas = len(glob.glob("../Data/TAD/RNAseq/*.counts")) - 1
+no_TAD_mirnas = len(glob.glob("Data/TAD/miRNA/*.txt")) - 1
+no_TAD_rnas = len(glob.glob("Data/TAD/RNAseq/*.counts")) - 1
 
-no_TSC_mirnas = len(glob.glob("../Data/TSC/miRNA/*.txt")) - 1
-no_TSC_rnas = len(glob.glob("../Data/TSC/RNAseq/*.counts")) - 1
+no_TSC_mirnas = len(glob.glob("Data/TSC/miRNA/*.txt")) - 1
+no_TSC_rnas = len(glob.glob("Data/TSC/RNAseq/*.counts")) - 1
 
 #Otra forma de hacerlo
 #no_f = [len(files) for path, dirs, files in os.walk("/home/kevinml/Documentos/INMEGEN/lung-mirnas/Data")]

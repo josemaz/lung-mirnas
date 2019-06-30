@@ -4,7 +4,7 @@ import sys
 
 
 filename = sys.argv[1]
-fileids = pd.read_csv("../Database/" + filename + ".txt", sep='\t')
+fileids = pd.read_csv("Database/" + filename + ".txt", sep='\t')
 
 cases = []
 fids = []
@@ -13,7 +13,7 @@ for index, row in fileids.iterrows():
 
 	fid = row["id"]
 
-	with open("../json/qbyfileid.json", 'r') as f:
+	with open("json/qbyfileid.json", 'r') as f:
 		filters = json.load(f)
 	filters['content'][0]['content']['value'] = fid
 
@@ -33,5 +33,8 @@ for index, row in fileids.iterrows():
 	print(df.iloc[0]['cases.0.submitter_id'])
 
 df = pd.DataFrame({"case": cases, "fid": fids})
-df.to_csv("../Data/" + filename + "-cases.tsv", sep="\t", index = False)
+
+if not os.path.exists("Data"):
+	os.mkdir("Data")
+df.to_csv("Data/" + filename + "-cases.tsv", sep="\t", index = False)
 

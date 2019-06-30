@@ -4,7 +4,7 @@ import numpy as np
 import sys
 
 filename = sys.argv[1]
-cases = pd.read_csv("../Data/" + filename + "-cases.tsv", sep='\t')
+cases = pd.read_csv("Data/" + filename + "-cases.tsv", sep='\t')
 mirna_fid = []
 mirna_fname = []
 mirna_count = []
@@ -12,7 +12,7 @@ for index, row in cases.iterrows():
 
 	print(row['case'])
 
-	with open("../json/qbyMIRNA.json", 'r') as f:
+	with open("json/qbyMIRNA.json", 'r') as f:
 		filters = json.load(f)
 	filters['content'][0]['content']['value'] = row['case']
 
@@ -41,7 +41,7 @@ cases['mirna_fname'] = mirna_fname
 cases['mirna_fid'] = mirna_fid
 cases.rename(columns={'fid':'rnaseq_fid'}, inplace = True)
 
-cases.to_csv("../Data/" + filename + "-mirna.tsv", sep="\t", index = False)
+cases.to_csv("Data/" + filename + "-mirna.tsv", sep="\t", index = False)
 
 
 # print(cases)

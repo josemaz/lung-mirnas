@@ -12,10 +12,10 @@ def do_file (dir_name):
 
 dirname = sys.argv[1]
 
-db = pd.read_csv("../Data/" + dirname + "-mirna.tsv", sep='\t')
+db = pd.read_csv("Data/" + dirname + "-mirna.tsv", sep='\t')
 db = db[db.mirna_count != 0]
 
-os.chdir('../Data/')
+os.chdir('Data/')
 do_file(dirname)
 os.chdir(dirname)
 

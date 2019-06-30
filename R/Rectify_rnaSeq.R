@@ -1,8 +1,9 @@
 ###############################################################################
 ##Get the Work and Data dir
 ###############################################################################
+#ruta donde este la carpeta Data
 Sys.umask("003")
-DATADIR <- 'pipeline/'
+DATADIR <- 'pipeline/data/'
 RDATA <- paste(DATADIR, "rdata", sep="")
 dir.create(RDATA)
 cat('Data directory: ', DATADIR, '\n') #concatena e imprime

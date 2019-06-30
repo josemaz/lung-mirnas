@@ -3,14 +3,14 @@ import pandas as pd
 import numpy as np
 
 #/home/kevinml/Documentos/INMEGEN/lung-mirnas
-cases = pd.read_csv("../Data/NAD-mirna.tsv", sep='\t')
+cases = pd.read_csv("Data/NAD-mirna.tsv", sep='\t')
 rna_fname =[]
 
 for index, row in cases.iterrows():
 
 	print(row['case'])
 
-	with open("../json/get_rna_fname.json", 'r') as f:
+	with open("json/get_rna_fname.json", 'r') as f:
 		filters = json.load(f)
 	filters['content'][0]['content']['value'] = row['case']
 
@@ -32,4 +32,4 @@ for index, row in cases.iterrows():
 
 cases['rna_fname'] = rna_fname
 
-cases.to_csv("../Data/NAD-mirna_and_rna.tsv", sep="\t", index = False)
+cases.to_csv("Data/NAD-mirna_and_rna.tsv", sep="\t", index = False)
