@@ -61,6 +61,7 @@ colnames(genes)<-c("EnsemblID", "version") # genes es un dataframe de 2 columnas
 
 ##Save clean data
 normal<-list(Counts=normal, Annot=genes, targets=targets)
+cat('Saving NormalRaw.RData...\n')
 save(normal, file=paste(RDATA, "NormalRaw.RData", sep="/"), compress="xz")
 cat('NormalRaw.RData saved \n')
 #Al final normal es una lista donde en el primer elemento estan las cuentas de cada gen "Ctr", en el segundo elemento estan los ensembleID, en el tercer elemento estan
@@ -107,6 +108,7 @@ colnames(genes)<-c("EnsemblID", "version")
 
 ##Save clean data
 cancer<-list(Counts=cancer, Annot=genes, targets=targets)
+cat('Saving CancerRaw.RData...\n')
 save(cancer, file=paste(RDATA, "CancerRaw.RData", sep="/"), compress="xz")
 cat('CancerRaw.RData saved \n')
 
@@ -147,6 +149,7 @@ if(uniq.annot) {
 
 cat('Annotation file. Final dimension: ', paste(dim(annot), collapse=", "), '\n')
 ## Save clean data
+cat('Saving annot.RData...\n')
 save(annot, file=paste(RDATA, "annot.RData", sep="/"), compress="xz")
 cat('annot.RData saved \n')
 
@@ -229,8 +232,9 @@ stopifnot(all(1:nrow(M) %in% Annot$Row))
 
 ##Save the clean Data
 full<-list(M=M, Annot=Annot, Targets=targets)
+cat("Saving RawFull.RData...\n")
 save(full, file=paste(RDATA, "RawFull.RData", sep="/"), compress="xz")
-cat("Saving RawFull.RData \n")
+cat("RawFull.RData saved\n")
 
 ##############################################################################
 ## GREAT JOB!!! YOU MADE IT TILL THE END!!!!

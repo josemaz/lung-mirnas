@@ -41,8 +41,9 @@ full$Targets$Group<-factor(substr(full$Targets$ID, start=1, stop=3)) #subtr regr
 #En targets s crea un acolumna que indica si la muestra es de individuo sano o canceroso
 
 write.table(full$Targets, file=paste(RDATA, "Targets.tsv" , sep="/"), sep="\t", quote=FALSE, row.names=FALSE)
+cat("Saving RawFull.RData... \n")
 save(full, file=paste(RDATA, "RawFull.RData", sep="/"), compress="xz")
-cat("Saving RawFull.RData \n")
+cat("RawFull.RData saved.\n")
 
 ##########################################
 ## EXPLORATORY ANALYSIS (NOISeq package)
@@ -133,7 +134,7 @@ cat("GC bias plot generated\n")
 #########################
 # A complete pdf report can be obtained using this function.
 #¿No funciona con mas de 2 grupos?
-QCreport(mydata, factor="Group", file=paste(PLOTSDIR, "QCReport.pdf", sep="/"))
+#QCreport(mydata, factor="Group", file=paste(PLOTSDIR, "QCReport.pdf", sep="/"))
 
 
 #############################
