@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 #abrimos los archivos
 file1 = pd.read_csv("Data/NAD-mirna.tsv", sep="\t")
@@ -21,6 +22,9 @@ cero_mirnas = []
 one_mirnas = []
 two_mirnas = []
 three_mirnas = []
+
+os.mkdir("Graphs")
+os.chdir("Graphs")
 
 #We make the plot for every group
 i = 0
@@ -60,7 +64,8 @@ for (element, f_name) in zip(all_mirnas, f_names):
 	plt.xticks(y_pos, bars)
 	plt.xlabel('no. miRNAs')
 	plt.ylabel('Frequency')
-	plt.show()
+	#plt.show()
+	#plt.savefig("no_mirnas_" + f_names[i] + ".png")
 	i+=1
 
 #This plot is a Resume for all the previous information
@@ -98,4 +103,7 @@ plt.xticks(index + bar_width, ('NAD', 'NSC', 'TAD', 'TSC'))
 plt.legend()
 
 plt.tight_layout()
-plt.show()
+#plt.show()
+plt.savefig("no_mirnas_ALL.png")
+
+os.chdir("..")
