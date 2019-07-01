@@ -56,7 +56,8 @@ colnames(normal)<-targets$ID #normal tiene muchas columnas, donde cada columna e
 ##Let's change the annotation 
 genes<-do.call(rbind,sapply(genes[,1], strsplit, split=".", fixed=TRUE))
 colnames(genes)<-c("EnsemblID", "version") # genes es un dataframe de 2 columnas, en la primera esta el ensemble ID y en la otra la verison
-write.table(genes[,"EnsemblID"], "ensembleIDs_Normal.tsv", sep="\t", row.names = FALSE) #Se hace un archivo con los ensemble IDs
+#write.table(genes[,"EnsemblID"], "ensembleIDs_Normal.tsv", sep="\t", row.names = FALSE) #Se hace un archivo con los ensemble IDs
+#La linea anterior es por si quieres obtener los ensemble id de las muestras sanas
 
 ##Save clean data
 normal<-list(Counts=normal, Annot=genes, targets=targets)
@@ -101,7 +102,8 @@ colnames(cancer)<-targets$ID
 ##Let's change the annotation 
 genes<-do.call(rbind,sapply(genes[,1], strsplit, split=".", fixed=TRUE))
 colnames(genes)<-c("EnsemblID", "version")
-write.table(genes[,"EnsemblID"], "ensembleIDs_Cancer.tsv", sep="\t", row.names = FALSE)
+#write.table(genes[,"EnsemblID"], "ensembleIDs_Cancer.tsv", sep="\t", row.names = FALSE)
+#La linea de arriba es por si tquieres obtener los ensemble id de las muestras cancerosas
 
 ##Save clean data
 cancer<-list(Counts=cancer, Annot=genes, targets=targets)
