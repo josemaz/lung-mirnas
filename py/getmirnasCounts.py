@@ -11,7 +11,7 @@ file3 = pd.read_csv("Data/TAD-mirna.tsv", sep="\t")
 file4 = pd.read_csv("Data/TSC-mirna.tsv", sep="\t")
 
 all_mirnas = []
-all_mirnas.append(list(file1["mirna_count"]))
+all_mirnas.append(list(file1["mirna_count"])) #lista con las cuentas
 all_mirnas.append(list(file2["mirna_count"]))
 all_mirnas.append(list(file3["mirna_count"]))
 all_mirnas.append(list(file4["mirna_count"]))
@@ -33,14 +33,14 @@ for (element, f_name) in zip(all_mirnas, f_names):
 	#Se va a usar en el resumen gral
 	if len(cuentas) == 2:
 		cero_mirnas.append(0)	
-		one_mirnas.append(cuentas.values()[0])	
-		two_mirnas.append(cuentas.values()[1])
+		one_mirnas.append(list(cuentas.values())[0])	
+		two_mirnas.append(list(cuentas.values())[1])
 	else:
-		cero_mirnas.append(cuentas.values()[0])	
-		one_mirnas.append(cuentas.values()[1])
-		two_mirnas.append(cuentas.values()[2])
+		cero_mirnas.append(list(cuentas.values())[0])	
+		one_mirnas.append(list(cuentas.values())[1])
+		two_mirnas.append(list(cuentas.values())[2])
 	if len(cuentas) == 4:
-		three_mirnas.append(cuentas.values()[3])
+		three_mirnas.append(list(cuentas.values())[3])
 	else:
 		three_mirnas.append(0)	
 	###########
