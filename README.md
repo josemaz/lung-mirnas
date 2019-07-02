@@ -35,20 +35,20 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón
    1. `python getcases.py NAD` [Obtencion de Case ID para poder bajar datos]
    2. `python getcases.py TAD`
    3. `python getcases.py NSC`
-   4. `python getcases.py TSC`
-   ...
+   4. `python getcases.py TSC`   
+   ...  
    5. `python casemirna.py NAD` [Obtencion de mirnafile_ID para bajar datos]
    6. `python casemirna.py TAD`
    7. `python casemirna.py NSC`
-   8. `python casemirna.py TSC`
-   ...
-   9. `python getmirnasCounts.py` [Grafica de la cantidad de miRNAs]
-   ...
-   10. `python downdata.py TSC` [Breve descripcion]
+   8. `python casemirna.py TSC`  
+   ...  
+   9. `python getmirnasCounts.py` [Grafica de la cantidad de miRNAs]  
+   ...  
+   10. `python downdata.py TSC` [Descarga de archivos de RNASeq y miRNASeq]
    11. `python downdata.py NAD`
    12. `python downdata.py TAD`
-   13. `python downdata.py NSC`
-   ...
+   13. `python downdata.py NSC`  
+   ...  
    13. `python file_number.py` [Grafica de la cantidad de archivos]
    
 
