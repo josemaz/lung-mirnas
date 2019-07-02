@@ -34,7 +34,7 @@ do_file('RNAseq')
 do_file('miRNA')
 
 #print(fore.LIGHT_BLUE + style.BOLD + "Downloading RNAseq data..." + style.RESET)
-print("Downloading RNAseq data...")
+print("\nDownloading RNAseq data...")
 os.chdir("RNAseq")
 
 with open("index.txt", mode='w+') as rna_file: 
@@ -46,7 +46,7 @@ with open("index.txt", mode='w+') as rna_file:
 os.chdir("..")
 
 #print(fore.LIGHT_BLUE + style.BOLD + "Downloading miRNA data..." + style.RESET)
-print("Downloading miRNA data...")
+print("\nDownloading miRNA data...")
 os.chdir("miRNA")
 
 with open("index.txt", mode='w+') as mirna_file:

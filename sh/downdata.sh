@@ -6,6 +6,8 @@ echo '########################################'
 
 for i in NAD TAD NSC TSC
 do
+	echo
+	echo
 	echo "------------ Processing $i -------------"
 	python py/getcases.py -t $i
 	python py/casemirna.py -t $i

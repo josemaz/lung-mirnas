@@ -22,6 +22,7 @@ cero_mirnas = []
 one_mirnas = []
 two_mirnas = []
 three_mirnas = []
+number_mirnas = [cero_mirnas,one_mirnas,two_mirnas,three_mirnas]
 
 os.mkdir("Graphs")
 os.chdir("Graphs")
@@ -29,24 +30,26 @@ os.chdir("Graphs")
 #We make the plot for every group
 i = 0
 for (element, f_name) in zip(all_mirnas, f_names):
-	print(f_name)
 	cuentas = {number: element.count(number) for number in element}
-	print(cuentas)
+	
+	listita = cuentas.items() #Tiene una lista de tuplas [(0,veces),(1,veces)]
 
-	#Guardamos en listas la cantidad de mirnas de cada tipo que tiene cada archivo
-	#Se va a usar en el resumen gral
-	if len(cuentas) == 2:
-		cero_mirnas.append(0)	
-		one_mirnas.append(list(cuentas.values())[0])	
-		two_mirnas.append(list(cuentas.values())[1])
-	else:
-		cero_mirnas.append(list(cuentas.values())[0])	
-		one_mirnas.append(list(cuentas.values())[1])
-		two_mirnas.append(list(cuentas.values())[2])
-	if len(cuentas) == 4:
-		three_mirnas.append(list(cuentas.values())[3])
-	else:
-		three_mirnas.append(0)	
+	for tupla in listita:
+		if tupla[0] == 0:
+			cero_mirnas.append(tupla[1])
+		if tupla[0] == 1:
+			one_mirnas.append(tupla[1])
+		if tupla[0] == 2:
+			two_mirnas.append(tupla[1])
+		if tupla[0] == 3:
+			three_mirnas.append(tupla[1])
+	
+	#No en todos los casos va haber con 0,1,2 o 3 miRNAs, entonces buscas esos casos y pones un cer en esa posicion
+	opciones = [0,1,2,3]  
+	for i in range(len(opciones)):
+		if opciones[i] not in list(cuentas.keys()):
+			number_mirnas[i].insert(opciones[i],0)
+
 	###########
 	height = cuentas.values()
 	if len(height) == 4:
@@ -67,6 +70,14 @@ for (element, f_name) in zip(all_mirnas, f_names):
 	#plt.show()
 	#plt.savefig("no_mirnas_" + f_names[i] + ".png")
 	i+=1
+
+#Desplegamos en la pantalla los resultados
+print("\nmiRNAs p/RNA   NAD   TAD   NSC   TSC")
+print("     0          {}    {}    {}    {}".format(cero_mirnas[0],cero_mirnas[1],cero_mirnas[2],cero_mirnas[3]))
+print("     1          {}    {}    {}    {}".format(one_mirnas[0],one_mirnas[1],one_mirnas[2],one_mirnas[3]))
+print("     2          {}    {}    {}    {}".format(two_mirnas[0],two_mirnas[1],two_mirnas[2],two_mirnas[3]))
+print("     3          {}    {}    {}    {}\n".format(three_mirnas[0],three_mirnas[1],three_mirnas[2],three_mirnas[3]))
+
 
 #This plot is a Resume for all the previous information
 n_groups = 4
