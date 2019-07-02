@@ -7,9 +7,9 @@ echo '########################################'
 for i in NAD TAD NSC TSC
 do
 	echo "------------ Processing $i -------------"
-	#python py/getcases.py -t $i
-	#python py/casemirna.py -t $i
-	#python py/downdata.py -t $i
+	python py/getcases.py -t $i
+	python py/casemirna.py -t $i
+	python py/downdata.py -t $i
 done
 echo
 echo "Done; Files saved in Data/"
