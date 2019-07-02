@@ -1,10 +1,17 @@
 import json, requests, io
 import pandas as pd
-import sys
+import sys, argparse
 import os
 
+parser = argparse.ArgumentParser(description='Script to download data of lung cancer from TCGA')
+parser.add_argument('-t', '--type',
+        help='Sample type. Ej: NAD',
+        required='True',
+        choices=['NAD', 'TAD', 'NSC', 'TSC'],
+        default='NAD')
+results = parser.parse_args(sys.argv[1:])
 
-filename = sys.argv[1]
+filename = results.type
 fileids = pd.read_csv("Database/" + filename + ".txt", sep='\t')
 
 cases = []

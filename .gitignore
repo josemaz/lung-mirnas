@@ -1,3 +1,5 @@
 Data/
 __pycache__/
-
+pipeline/plots/
+pipeline/rdata/
+.DS_Store
