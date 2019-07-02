@@ -1,9 +1,19 @@
 import json, requests, io
 import pandas as pd
 import numpy as np
-import sys
+import sys, argparse
 
-filename = sys.argv[1]
+#Managing input
+parser = argparse.ArgumentParser(description='Script to download data of lung cancer from TCGA')
+parser.add_argument('-t', '--type',
+        help='Sample type. Ej: NAD',
+        required='True',
+        choices=['NAD', 'TAD', 'NSC', 'TSC'],
+        default='NAD')
+results = parser.parse_args(sys.argv[1:])
+
+#Begining of the programm
+filename = results.type
 cases = pd.read_csv("Data/" + filename + "-cases.tsv", sep='\t')
 mirna_fid = []
 mirna_fname = []

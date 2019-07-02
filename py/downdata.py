@@ -2,16 +2,26 @@ import requests, json, re
 import gzip, shutil, os
 import pandas as pd
 import io, sys
-import Util
+import Util, argparse
 #from colored import fore, back, style
 
+#Usefull function
 def do_file (dir_name):
 	if os.path.exists(dir_name):
 		shutil.rmtree(dir_name)
 	os.mkdir(dir_name)
 
-dirname = sys.argv[1]
+#Managing input
+parser = argparse.ArgumentParser(description='Script to download data of lung cancer from TCGA')
+parser.add_argument('-t', '--type',
+        help='Sample type. Ej: NAD',
+        required='True',
+        choices=['NAD', 'TAD', 'NSC', 'TSC'],
+        default='NAD')
+results = parser.parse_args(sys.argv[1:])
 
+#Begining of the programm
+dirname = results.type
 db = pd.read_csv("Data/" + dirname + "-mirna.tsv", sep='\t')
 db = db[db.mirna_count != 0]
 

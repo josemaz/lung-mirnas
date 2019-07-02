@@ -3,6 +3,7 @@ import pandas as pd
 import sys, argparse
 import os
 
+#Managing input
 parser = argparse.ArgumentParser(description='Script to download data of lung cancer from TCGA')
 parser.add_argument('-t', '--type',
         help='Sample type. Ej: NAD',
@@ -11,6 +12,7 @@ parser.add_argument('-t', '--type',
         default='NAD')
 results = parser.parse_args(sys.argv[1:])
 
+#Begining of the programm
 filename = results.type
 fileids = pd.read_csv("Database/" + filename + ".txt", sep='\t')
 
