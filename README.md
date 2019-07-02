@@ -1,24 +1,29 @@
 # lung-mirnas
-Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón
+Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
 
 ## Contenido deCarpetas
 
 - **Database (4 files)**    
-   Esta carpeta es **fija** y contine los archivos originales de cancer de pulmón (NAD.txt, TAD.txt, NSC.txt, TCS,TXT).
+   Esta carpeta es **fija** y contine los archivos originales de cancer de pulmón (NAD.txt, TAD.txt, NSC.txt, TCS,txt).
 
 - **Data (8 files, 4 directories)**  
-   sta carpeta es **generada** y contiene de NAD,TAD,NSC & TSC archivos de c/u. El ".*-cases.tsv" contiene el caseID y el fid, el ".*-mirna.tsv" contiene caseID, rnaseq_fid, cantidad de mirnas, mirna_fname y el mirna_fid  
+   Carpeta **generada**. Los archivos "-cases.tsv" contiene el caseID y el fid de NAD,TAD,NSC & de TSC, mientras que los archivos "-mirna.tsv" contien caseID, rnaseq_fid, cantidad de mirnas, mirna_fname y el mirna_fid de los mismos.  
+   Hay 4 directorios (NAD,TAD,NSC & TSC); cada uno contiene un archivo de cuentas de RNASEQ y otro de miRNASeq.
    
 - **Graphs (2 files)**  
+   Carpeta **generada** que contiene 2 archivos ".png".
+   - no_mirnas_ALL.png: Grafica de cantidad de miRNAs por RNA de NAD,TAD,NSC & TSC
+   - no_files.png: Grafica de antidad de archivos de NAD,TAD,NSC & TSC
 
 - **json (2 files)**  
-   Esta carpeta es **fija** y tiene un archivo con el que se hizo el query a TCGA y obtener los CaseID a partir de los manifest;  Tiene otro archivo para hacer un query a TCGA y obtener rnaseq_fid, cantidad de mirnas, mirna_fname y el mirna_fid a partir de los CaseID
-   - qbyfileid.json: Script para 
-   - qbyMIRNA.json: Script para 
+   Carpeta **fija.**
+   - qbyfileid.json: Script para hacer el query a TCGA y obtener los CaseID a partir de los manifest.
+   - qbyMIRNA.json: Script que ayudara a obtener los nombres de los archivos a descargar a partir de CaseID.
    
 - **pipeline (1 file)**  
 
 - **py (6 files)**  
+   Carpeta **fija.**
    - Util.py: Libreria creada para el download de informacion
    - casemirna.py: Script para obtener rnaseq_fid, cantidad de mirnas, mirna_fname y el mirna_fid a partir de los CaseID
    - downdata.py: Script para bajar archivos de cuentas de RNASeq y de miRNASeq y dentro de crapetas, ademas crear un archivo llamado "index.txt" con un listado de tosos los archivos descargados.   
@@ -27,6 +32,7 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón
    - getmirnasCounts.py: Script para graficar el numero de miRNAs de NAD,TAD,NSC y de TSC
   
 - **R (4 files)**  
+   Carpeta **fija.**
    - 01-Rectify_rnaSeq.R: Script para 
    - 02-PRE-QC.R: Script para 
    - 03-NORM.R: Script para 
