@@ -21,7 +21,7 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón
    - casemirna.py: Script para obtener rnaseq_fid, cantidad de mirnas, mirna_fname y el mirna_fid a partir de los CaseID
    - downdata.py: Script para bajar archivos de cuentas de RNASeq y de miRNASeq y dentro de crapetas, ademas crear un archivo llamado "index.txt" con un listado de tosos los archivos descargados.   
    - file_number.txt: Script para saber el numero de archivos de raw counts se tienen tanto de RNASeq como de miRNASeq y hacer graficas
-   -getcases.py: Script para obtener los caseID a partir de archivos manifest 
+   -getcases.py: Script para obtener los caseID a partir de archivos manifest
    -getmirnasCounts.py: Script para graficar el numero de miRNAs de NAD,TAD,NSC y de TSC
 
 # Instrucciones para procesar los datos
@@ -31,17 +31,30 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón
  - R (3.6.0)
  - librerias (matplotlib.pyplot, numpy, glob, pandas, json, requests, re, gzip, shutil, )
 
-## Descarga de los datos
-   1. `python getcases.py TSC` [Breve descripcion]
-   2. `python getcases.py NAD`
+## Descarga de los datos (python)
+   1. `python getcases.py NAD` [Obtencion de Case ID para poder bajar datos]
+   2. `python getcases.py TAD`
+   3. `python getcases.py NSC`
+   4. `python getcases.py TSC`
    ...
-   3. `python casemirna.py NAD`
-   4. `python casemirna.py TAD`
+   5. `python casemirna.py NAD` [Obtencion de mirnafile_ID para bajar datos]
+   6. `python casemirna.py TAD`
+   7. `python casemirna.py NSC`
+   8. `python casemirna.py TSC`
    ...
-   4. `python casemirna.py TAD`
+   9. `python getmirnasCounts.py` [Grafica de la cantidad de miRNAs]
+   ...
+   10. `python downdata.py TSC` [Breve descripcion]
+   11. `python downdata.py NAD`
+   12. `python downdata.py TAD`
+   13. `python downdata.py NSC`
+   ...
+   13. `python file_number.py` [Grafica de la cantidad de archivos]
+   
 
-## Control de calidad y normalizacion
-   1. 
+## Control de calidad y normalizacion (R)
+   1. `Rscript 01-Rectify_rnaSeq.R` [Breve descripcion]
+   2. `Rscript 02-PRE-QC.R` [Breve descripcion]
 
 ## Descarga
  
