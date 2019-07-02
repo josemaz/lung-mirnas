@@ -13,8 +13,8 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
    
 - **Graphs (2 files)**  
    Carpeta **generada** con 2 archivos ".png".
-   - no_mirnas_ALL.png: Gráfica de cantidad de miRNAs por RNA de NAD,TAD,NSC & TSC.
-   - no_files.png: Gráfica de antidad de archivos de NAD,TAD,NSC & TSC.
+   - no_mirnas_ALL.png: Gráfica de cantidad de miRNAs por RNA de los 4 tipos de tejido.
+   - no_files.png: Gráfica de cantidad de archivos descargados de RNASeq y de miRNASeq de los 4 tipos de tejido.
 
 - **json (2 files)**  
    Carpeta **fija** con 2 scripts.
