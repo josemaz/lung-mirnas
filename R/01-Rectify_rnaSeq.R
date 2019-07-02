@@ -49,7 +49,7 @@ cat('Genes in normal samples match positions \n')
 
 ##Let's keep only the raw counts
 normal<-do.call(cbind, lapply(normal, function(x)x[,"raw_counts"])) #Como los ensemble Id ya estan en genes, solo nos quedamos con las cuentas en "normal"
-targets<-data.frame(File=cases$V2, ID=paste("Ctr", 1:length(cases$V2), sep=""), CASEID=cases$V1) #File = el path de los archivos
+targets<-data.frame(File=cases$V2, ID=paste("NAD", 1:length(cases$V2), sep=""), CASEID=cases$V1) #File = el path de los archivos
 #ID = numero de muestra/archivo, CaseID = CaseID
 colnames(normal)<-targets$ID #normal tiene muchas columnas, donde cada columna es un gen y sus filas son las cuentas de un transcrito
 
@@ -97,7 +97,7 @@ cat('Genes in cancer samples match positions \n')
 
 ##Let's keep only the raw counts
 cancer<-do.call(cbind, lapply(CancerData, function(x)x[,"raw_counts"]))
-targets<-data.frame(File=cases$V2, ID=paste("tBa", 1:length(cases$V2), sep=""), CASEID=cases$V1)
+targets<-data.frame(File=cases$V2, ID=paste("TAD", 1:length(cases$V2), sep=""), CASEID=cases$V1)
 colnames(cancer)<-targets$ID
 
 ##Let's change the annotation 
