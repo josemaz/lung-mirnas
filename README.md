@@ -28,33 +28,17 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón
 
 ## Prerequistos
  - Python (3.7.3)
+ - librerias python (matplotlib.pyplot, numpy, glob, pandas, json, requests, re, gzip, shutil)
  - R (3.6.0)
- - librerias (matplotlib.pyplot, numpy, glob, pandas, json, requests, re, gzip, shutil, )
+ - librerias R (BiocParallel, parallel, NOISeq, EDASeq)
 
 ## Descarga de los datos (python)
-   1. `python getcases.py NAD` [Obtencion de Case ID para poder bajar datos]
-   2. `python getcases.py TAD`
-   3. `python getcases.py NSC`
-   4. `python getcases.py TSC`   
-   ...  
-   5. `python casemirna.py NAD` [Obtencion de mirnafile_ID para bajar datos]
-   6. `python casemirna.py TAD`
-   7. `python casemirna.py NSC`
-   8. `python casemirna.py TSC`  
-   ...  
-   9. `python getmirnasCounts.py` [Grafica de la cantidad de miRNAs]  
-   ...  
-   10. `python downdata.py TSC` [Descarga de archivos de RNASeq y miRNASeq]
-   11. `python downdata.py NAD`
-   12. `python downdata.py TAD`
-   13. `python downdata.py NSC`  
-   ...  
-   13. `python file_number.py` [Grafica de la cantidad de archivos]
-   
+   1. `bash sh/downdata.sh` [Descarga de datos de RNASeq y miRNASeq; Gráfica de miRNAs y de Archivos]
 
 ## Control de calidad y normalizacion (R)
-   1. `Rscript 01-Rectify_rnaSeq.R` [Breve descripcion]
-   2. `Rscript 02-PRE-QC.R` [Breve descripcion]
+   1. `Rscript 01-Rectify_rnaSeq.R` [Preparacion de archivos]
+   2. `Rscript 02-PRE-QC.R` [Control de calidad, graficas de los datos obtenidos]
+   3. `Rscript 03-NORM.R` [Normalización]
 
 ## Descarga
  
