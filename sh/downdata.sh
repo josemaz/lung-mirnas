@@ -13,6 +13,7 @@ do
 	python py/casemirna.py -t $i
 	python py/downdata.py -t $i
 done
+
 echo
 echo "Done; Files saved in Data/"
 
