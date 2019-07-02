@@ -22,7 +22,7 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
    - qbyMIRNA.json: Script que ayudara a obtener los nombres de los archivos a descargar a partir de CaseID.
    
 - **pipeline (1 file)**  
-   - biomart-20181212.txt: archivo con la anotación de todos los genes de humano, a partir de donde se mapearan los obtenidos. 
+   - biomart-20181212.txt: Archivo con la anotación de todos los genes de *Homo sapiens*, a partir de donde se mapearan los genes  obtenidos de los archivos de RNASeq. 
 
 - **py (6 files)**  
    Carpeta **fija** con 6 scripts.
