@@ -4,7 +4,7 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
 ## Contenido deCarpetas
 
 - **Database (4 files)**    
-   Esta carpeta es **fija** y contine los archivos originales (manifest) de los diferentes tipos de tejido de cancer de pulmón (NAD.txt, TAD.txt, NSC.txt, TCS,txt).
+   Esta carpeta es **fija** y contine los archivos originales (manifest) de los diferentes tipos de tejido de cancer de pulmón (NAD.txt, TAD.txt, NSC.txt, TSC,txt).
 
 - **Data (8 files, 4 directories)**  
    Carpeta **generada**. Contiene archivos con terminación "-cases.tsv", que tienen el caseID y el file id de de los 4 tipos de tejido (NAD,TAD,NSC & de TSC), mientras que los archivos con terminación "-mirna.tsv" contien caseID, rnaseq_fid, cantidad de mirnas, mirna_fname y el mirna_file_id de los mismos.  
