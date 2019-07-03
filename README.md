@@ -44,7 +44,7 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
 
 # Instrucciones para procesar los datos
 
-## Prerequistos
+## Prerrequistos
  - Python (3.7.3)
  - librerias python (matplotlib.pyplot, numpy, glob, pandas, json, requests, re, gzip, shutil)
  - R (3.6.0)
