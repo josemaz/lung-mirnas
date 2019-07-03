@@ -1,7 +1,7 @@
 # lung-mirnas
 Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
 
-## Contenido deCarpetas
+## Contenido de Carpetas
 
 - **Database (4 files)**    
    Esta carpeta es **fija** y contine los archivos originales (manifest) de los diferentes tipos de tejido de cancer de pulmón (NAD.txt, TAD.txt, NSC.txt, TSC,txt).
