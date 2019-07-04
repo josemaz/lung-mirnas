@@ -6,8 +6,8 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
 - **Database (4 files)**    
    Esta carpeta es **fija** y contine los archivos originales (manifest) de los diferentes tipos de tejido de cancer de pulmón (NAD.txt, TAD.txt, NSC.txt, TSC,txt).
 
-- **Data (8 files, 4 directories)**  
-   Carpeta **generada**. Contiene archivos con terminación "-cases.tsv", que tienen el caseID y el file id de de los 4 tipos de tejido (NAD,TAD,NSC & de TSC), mientras que los archivos con terminación "-mirna.tsv" contien caseID, rnaseq_fid, cantidad de mirnas, mirna_fname y el mirna_file_id de los mismos.  
+- **Data (2 directories)**  
+   Carpeta **generada**. Contiene 2 directorios: "Adeno" & "Squamous", que contienen toda la informacion porducida de estos dos tipos grupos de tejido. 
      
    Hay 4 directorios (NAD,TAD,NSC & TSC); cada uno contiene un archivo de cuentas de RNASeq y otro de miRNASeq.
    
@@ -35,10 +35,10 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
   
 - **R (4 files)**  
    Carpeta **fija** con 4 scripts.
-   - 01-Rectify_rnaSeq.R: Script para 
-   - 02-PRE-QC.R: Script para 
-   - 03-NORM.R: Script para 
-   - 04-POST-QC.R: Script para 
+   - 01-Rectify_rnaSeq.R: Script para procesar la información.
+   - 02-PRE-QC.R: Script que hace un pre-control de calidad a los datos y genera plots.
+   - 03-NORM.R: Script para realizar la normalizacion de la información.
+   - 04-POST-QC.R: Script que hace un post-control de calidad a los datos.
 
    
 
@@ -54,9 +54,9 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
    1. `bash sh/downdata.sh` [Descarga de datos de RNASeq y miRNASeq; Gráfica de miRNAs y de Archivos]
 
 ## Control de calidad y normalizacion (R)
-   1. `Rscript R/01-Rectify_rnaSeq.R` [Preprocesamiento de archivos]
-   2. `Rscript R/02-PRE-QC.R` [Control de calidad, graficas de los datos obtenidos]
-   3. `Rscript R/03-NORM.R` [Normalización]
+   1. `Rscript --vanilla R/01-Rectify_rnaSeq.R Adeno` [Preprocesamiento de archivos]
+   2. `Rscript --vanilla R/02-PRE-QC.R Adeno` [Control de calidad, graficas de los datos obtenidos]
+   3. `Rscript --vanilla R/03-NORM.R Adeno` [Normalización]
 
 
  
