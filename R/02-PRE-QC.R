@@ -66,7 +66,7 @@ full$Targets$Group<-factor(substr(full$Targets$ID, start=1, stop=3)) #subtr regr
 
 write.table(full$Targets, file=paste(TISSUEDATA, "Targets.tsv" , sep="/"), sep="\t", quote=FALSE, row.names=FALSE)
 cat("Saving RawFull.RData... \n")
-save(full, file=paste(RDATA, "RawFull.RData", sep="/"), compress="xz")
+save(full, file=paste(TISSUEDATA, "RawFull.RData", sep="/"), compress="xz")
 cat("RawFull.RData saved.\n")
 
 ##########################################
