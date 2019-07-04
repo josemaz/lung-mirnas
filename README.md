@@ -54,7 +54,7 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
    1. `bash sh/downdata.sh` [Descarga de datos de RNASeq y miRNASeq; Gráfica de miRNAs y de Archivos]
 
 ## Control de calidad y normalizacion (R)
-   1. `Rscript R/01-Rectify_rnaSeq.R` [Preparacion de archivos]
+   1. `Rscript R/01-Rectify_rnaSeq.R` [Preprocesamiento de archivos]
    2. `Rscript R/02-PRE-QC.R` [Control de calidad, graficas de los datos obtenidos]
    3. `Rscript R/03-NORM.R` [Normalización]
 
