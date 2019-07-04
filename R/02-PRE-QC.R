@@ -1,15 +1,15 @@
 ###############################################################################
-##Get the Tissue Type (Adenocarcinoma or carcinoma form Scamous Cells)
+##Get the Tissue Type (Adenocarcinoma or Squamous Cells carcinoma)  
 ###############################################################################
 args = commandArgs(trailingOnly=TRUE)
 if (length(args)==0) {
-  stop("Execution: Rscript --vanilla R/02-PRE-QC.R (tissue type); tissue type: Adeno or Scamous", call.=FALSE)
+  stop("Execution: Rscript --vanilla R/02-PRE-QC.R (tissue type); tissue type: Adeno or Squamous", call.=FALSE)
 } 
 Tissue <- args[1] 
 if (Tissue == "Adeno"){
   normalTissue <- "NAD"
   cancerTissue <- "TAD"
-} else if (Tissue == "Scamous"){
+} else if (Tissue == "Squamous"){
   normalTissue <- "NSC"
   cancerTissue <- "TSC"  
 }
@@ -17,11 +17,10 @@ if (Tissue == "Adeno"){
 ##Get the Work and Data dir
 ###############################################################################
 Sys.umask("003")
-RDATA <- "rdata"
-TISSUEDATA <- paste(RDATA, Tissue, sep="/")
-cat('Data directory: ', TISSUEDATA, '\n') #concatena e imprime
+RDATA <- paste("Data",Tissue, "rdata", sep = "/")
+cat('Data directory: ', RDATA, '\n') #concatena e imprime
 
-PLOTSDIR <-paste(TISSUEDATA, "plots", sep="/")
+PLOTSDIR <-paste(RDATA, "plots", sep="/")
 dir.create(PLOTSDIR)
 #PLOTSDIR <-paste(DATADIR, "plots", sep = "")
 PREDIR <- paste(PLOTSDIR, "QC_PRE", sep = "/")
@@ -45,7 +44,7 @@ w <- 1024 #Resolucion de los plots
 h <- 1024  #Resolucion de los plots
 p <- 24   #Resolucion de los plots
 
-load(file=paste(TISSUEDATA, "RawFull.RData", sep="/"))
+load(file=paste(RDATA, "RawFull.RData", sep="/"))
 
 ##########################################
 ###Let's keep only the GC & length annotated genes
@@ -64,9 +63,9 @@ row.names(full$Targets)<-full$Targets$ID #El nombre de las filas ahora correspon
 full$Targets$Group<-factor(substr(full$Targets$ID, start=1, stop=3)) #subtr regresa NAD y TAD de NAD20 y TAD21, p.e.
 #En targets s crea un acolumna que indica si la muestra es de individuo sano o canceroso
 
-write.table(full$Targets, file=paste(TISSUEDATA, "Targets.tsv" , sep="/"), sep="\t", quote=FALSE, row.names=FALSE)
+write.table(full$Targets, file=paste(RDATA, "Targets.tsv" , sep="/"), sep="\t", quote=FALSE, row.names=FALSE)
 cat("Saving RawFull.RData... \n")
-save(full, file=paste(TISSUEDATA, "RawFull.RData", sep="/"), compress="xz")
+save(full, file=paste(RDATA, "RawFull.RData", sep="/"), compress="xz")
 cat("RawFull.RData saved.\n")
 
 ##########################################

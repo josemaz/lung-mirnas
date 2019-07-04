@@ -1,15 +1,15 @@
 ###############################################################################
-##Get the Tissue Type (Adenocarcinoma or carcinoma form Scamous Cells)
+##Get the Tissue Type (Adenocarcinoma or Squamous Cells carcinoma)
 ###############################################################################
 args = commandArgs(trailingOnly=TRUE)
 if (length(args)==0) {
-  stop("Execution: Rscript --vanilla R/01-Rectify_rnaSeq.R (tissue type); tissue type: Adeno or Scamous", call.=FALSE)
+  stop("Execution: Rscript --vanilla R/01-Rectify_rnaSeq.R (tissue type); tissue type: Adeno or Squamous", call.=FALSE)
 } 
 Tissue <- args[1] 
 if (Tissue == "Adeno"){
   normalTissue <- "NAD"
   cancerTissue <- "TAD"
-} else if (Tissue == "Scamous"){
+} else if (Tissue == "Squamous"){
   normalTissue <- "NSC"
   cancerTissue <- "TSC"  
 }
@@ -17,13 +17,11 @@ if (Tissue == "Adeno"){
 ##Get the Work and Data dir
 ###############################################################################
 Sys.umask("003")
-RDATA <- "rdata"
+RDATA <- paste("Data",Tissue, "rdata", sep = "/")
 if (!file.exists(RDATA)){
   dir.create(RDATA)
 }
-TISSUEDATA <- paste(RDATA, Tissue, sep="/")
-dir.create(TISSUEDATA)
-cat('Data directory: ', TISSUEDATA, '\n') #concatena e imprime
+cat('Data directory: ', RDATA, '\n') #concatena e imprime
 ###############################################################################
 ##Usefull Libraries
 ###############################################################################
@@ -44,7 +42,7 @@ register(MulticoreParam(workers=detectCores()-1, progress=TRUE))#Linux
 
 ##########################
 ## Control - NAD OR NSC
-normdir <- paste('Data', normalTissue, 'RNAseq/', sep = '/') #ruta donde este el archivo index.txt
+normdir <- paste('Data',Tissue , normalTissue, 'RNAseq/', sep = '/') #ruta donde este el archivo index.txt
 cat('Checking normal samples \n')
 cases <- read.table(paste(normdir,"index.txt", sep =""), header=F, sep='\t') #index.txt ahora es cases
 cases$V2 <- gsub(".{3}$", "", cases$V2) #Sustitucion de todos los matches de un string
@@ -79,7 +77,7 @@ colnames(genes)<-c("EnsemblID", "version") # genes es un dataframe de 2 columnas
 ##Save clean data
 normal<-list(Counts=normal, Annot=genes, targets=targets)
 cat('Saving NormalRaw.RData...\n')
-save(normal, file=paste(TISSUEDATA, "NormalRaw.RData", sep="/"), compress="xz")
+save(normal, file=paste(RDATA, "NormalRaw.RData", sep="/"), compress="xz")
 cat('NormalRaw.RData saved \n')
 #Al final normal es una lista donde en el primer elemento estan las cuentas de cada gen "Ctr", en el segundo elemento estan los ensembleID, en el tercer elemento estan
 #en el tercer elemento estan los paths de los archivos, en el cuarto los "Ctr" y en el quinto los CaseID
@@ -92,7 +90,7 @@ cat('NormalRaw.RData saved \n')
 ##      -Let's change the annotation 
 ##      -Save clean data
 ##############################################################################
-casedir <- paste('Data', cancerTissue, 'RNAseq/', sep = '/') #ruta donde este el archivo index.txt
+casedir <- paste('Data',Tissue, cancerTissue, 'RNAseq/', sep = '/') #ruta donde este el archivo index.txt
 ##########################
 ## TAD OR TSC
 cases <- read.table(paste(casedir, "index.txt", sep=""),header=F,sep="\t")
@@ -126,7 +124,7 @@ colnames(genes)<-c("EnsemblID", "version")
 ##Save clean data
 cancer<-list(Counts=cancer, Annot=genes, targets=targets)
 cat('Saving CancerRaw.RData...\n')
-save(cancer, file=paste(TISSUEDATA, "CancerRaw.RData", sep="/"), compress="xz")
+save(cancer, file=paste(RDATA, "CancerRaw.RData", sep="/"), compress="xz")
 cat('CancerRaw.RData saved \n')
 
 ##############################################################################
@@ -167,7 +165,7 @@ if(uniq.annot) {
 cat('Annotation file. Final dimension: ', paste(dim(annot), collapse=", "), '\n')
 ## Save clean data
 cat('Saving annot.RData...\n')
-save(annot, file=paste(TISSUEDATA, "annot.RData", sep="/"), compress="xz")
+save(annot, file=paste(RDATA, "annot.RData", sep="/"), compress="xz")
 cat('annot.RData saved \n')
 
 ##############################################################################
@@ -187,9 +185,9 @@ cat('annot.RData saved \n')
 ##          -Save the clean Data
 ##############################################################################
 cat('Merging counts and annotations \n')
-load(file=paste(TISSUEDATA, "annot.RData", sep="/"))
-load(file=paste(TISSUEDATA, "NormalRaw.RData", sep="/"))
-load(file=paste(TISSUEDATA, "CancerRaw.RData", sep="/"))
+load(file=paste(RDATA, "annot.RData", sep="/"))
+load(file=paste(RDATA, "NormalRaw.RData", sep="/"))
+load(file=paste(RDATA, "CancerRaw.RData", sep="/"))
 
 ##M=normal|tumor
 M<-cbind(normal$Counts, cancer$Counts)
@@ -250,7 +248,7 @@ stopifnot(all(1:nrow(M) %in% Annot$Row))
 ##Save the clean Data
 full<-list(M=M, Annot=Annot, Targets=targets)
 cat("Saving RawFull.RData...\n")
-save(full, file=paste(TISSUEDATA, "RawFull.RData", sep="/"), compress="xz")
+save(full, file=paste(RDATA, "RawFull.RData", sep="/"), compress="xz")
 cat("RawFull.RData saved\n")
 
 ##############################################################################
