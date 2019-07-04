@@ -20,17 +20,28 @@ parser.add_argument('-t', '--type',
         default='NAD')
 results = parser.parse_args(sys.argv[1:])
 
+filename = results.type
+
+if filename == "NAD":
+	dirname = "Adeno"
+	dirname2 = "NAD"
+elif filename == "TAD":
+	dirname = "Adeno"
+	dirname2 = "TAD"
+elif filename == "NSC":
+	dirname = "Squamous"
+	dirname2 = "NSC"
+elif filename == "NSC":
+	dirname = "Squamous"
+	dirname2 = "TSC"
+
 #Begining of the programm
-dirname = results.type
-db = pd.read_csv("Data/" + dirname + "-mirna.tsv", sep='\t')
+db = pd.read_csv("Data/" + dirname + "/" + dirname2 + "/" + filename + "-mirna.tsv", sep='\t')
 db = db[db.mirna_count != 0]
 
-os.chdir('Data/')
-do_file(dirname)
-os.chdir(dirname)
+os.chdir('Data/'  + dirname + "/" + dirname2)
 
 do_file('RNAseq')
-
 do_file('miRNA')
 
 #print(fore.LIGHT_BLUE + style.BOLD + "Downloading RNAseq data..." + style.RESET)
@@ -55,4 +66,4 @@ with open("index.txt", mode='w+') as mirna_file:
 		file_name = Util.download(row['mirna_fid'])
 		case_ID = row["case"]
 		mirna_file.write(case_ID + "\t" + file_name + '\n')
-os.chdir("..")
+os.chdir("../../../..")

@@ -46,5 +46,27 @@ df = pd.DataFrame({"case": cases, "fid": fids})
 
 if not os.path.exists("Data"):
 	os.mkdir("Data")
-df.to_csv("Data/" + filename + "-cases.tsv", sep="\t", index = False)
+if not os.path.exists("Data/Adeno"):
+	os.mkdir("Data/Adeno")
+if not os.path.exists("Data/Squamous"):
+	os.mkdir("Data/Squamous")
+
+if filename == "NAD":
+	dirname = "Adeno"
+	os.mkdir("Data/Adeno/NAD")
+	dirname2 = "NAD"
+elif filename == "TAD":
+	dirname = "Adeno"
+	os.mkdir("Data/Adeno/TAD")
+	dirname2 = "TAD"
+elif filename == "NSC":
+	dirname = "Squamous"
+	os.mkdir("Data/Squamous/NSC")
+	dirname2 = "NSC"
+elif filename == "NSC":
+	dirname = "Squamous"
+	os.mkdir("Data/Squamous/TSC")
+	dirname2 = "TSC"
+
+df.to_csv("Data/" + dirname + "/" + dirname2 + "/" + filename + "-cases.tsv", sep="\t", index = False)
 

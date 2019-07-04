@@ -6,10 +6,10 @@ import matplotlib.pyplot as plt
 import os
 
 #abrimos los archivos
-file1 = pd.read_csv("Data/NAD-mirna.tsv", sep="\t")
-file2 = pd.read_csv("Data/NSC-mirna.tsv", sep="\t")
-file3 = pd.read_csv("Data/TAD-mirna.tsv", sep="\t")
-file4 = pd.read_csv("Data/TSC-mirna.tsv", sep="\t")
+file1 = pd.read_csv("Data/Adeno/NAD/NAD-mirna.tsv", sep="\t")
+file2 = pd.read_csv("Data/Squamous/NSC/NSC-mirna.tsv", sep="\t")
+file3 = pd.read_csv("Data/Adeno/TAD/TAD-mirna.tsv", sep="\t")
+file4 = pd.read_csv("Data/Squamous/TSC/TSC-mirna.tsv", sep="\t")
 
 all_mirnas = []
 all_mirnas.append(list(file1["mirna_count"])) #lista con las cuentas
@@ -72,11 +72,11 @@ for (element, f_name) in zip(all_mirnas, f_names):
 	i+=1
 
 #Desplegamos en la pantalla los resultados
-print("\nmiRNAs p/RNA   NAD   TAD   NSC   TSC")
-print("     0          {}    {}    {}    {}".format(cero_mirnas[0],cero_mirnas[1],cero_mirnas[2],cero_mirnas[3]))
-print("     1          {}    {}    {}    {}".format(one_mirnas[0],one_mirnas[1],one_mirnas[2],one_mirnas[3]))
-print("     2          {}    {}    {}    {}".format(two_mirnas[0],two_mirnas[1],two_mirnas[2],two_mirnas[3]))
-print("     3          {}    {}    {}    {}\n".format(three_mirnas[0],three_mirnas[1],three_mirnas[2],three_mirnas[3]))
+print("\nmiRNAs\tNAD\tTAD\tNSC\tTSC")
+print("0\t{}\t{}\t{}\t{}".format(cero_mirnas[0],cero_mirnas[1],cero_mirnas[2],cero_mirnas[3]))
+print("1\t{}\t{}\t{}\t{}".format(one_mirnas[0],one_mirnas[1],one_mirnas[2],one_mirnas[3]))
+print("2\t{}\t{}\t{}\t{}".format(two_mirnas[0],two_mirnas[1],two_mirnas[2],two_mirnas[3]))
+print("3\t{}\t{}\t{}\t{}\n".format(three_mirnas[0],three_mirnas[1],three_mirnas[2],three_mirnas[3]))
 
 
 #This plot is a Resume for all the previous information

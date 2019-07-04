@@ -12,9 +12,23 @@ parser.add_argument('-t', '--type',
         default='NAD')
 results = parser.parse_args(sys.argv[1:])
 
-#Begining of the programm
 filename = results.type
-cases = pd.read_csv("Data/" + filename + "-cases.tsv", sep='\t')
+
+if filename == "NAD":
+	dirname = "Adeno"
+	dirname2 = "NAD"
+elif filename == "TAD":
+	dirname = "Adeno"
+	dirname2 = "TAD"
+elif filename == "NSC":
+	dirname = "Squamous"
+	dirname2 = "NSC"
+elif filename == "NSC":
+	dirname = "Squamous"
+	dirname2 = "TSC"
+
+#Begining of the programm
+cases = pd.read_csv("Data/" + dirname + "/" + dirname2 + "/" + filename + "-cases.tsv", sep='\t')
 mirna_fid = []
 mirna_fname = []
 mirna_count = []
@@ -51,7 +65,5 @@ cases['mirna_fname'] = mirna_fname
 cases['mirna_fid'] = mirna_fid
 cases.rename(columns={'fid':'rnaseq_fid'}, inplace = True)
 
-cases.to_csv("Data/" + filename + "-mirna.tsv", sep="\t", index = False)
+cases.to_csv("Data/" + dirname + "/" + dirname2 + "/" + filename + "-mirna.tsv", sep="\t", index = False)
 
-
-# print(cases)
