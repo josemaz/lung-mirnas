@@ -9,7 +9,7 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
 - **Data (2 directories)**  
    Carpeta **generada**. Contiene 2 directorios: "Adeno" & "Squamous", que contienen toda la informacion porducida de estos dos  grupos de tejido. 
      
-   Hay 4 directorios (NAD,TAD,NSC & TSC); cada uno contiene un archivo de cuentas de RNASeq y otro de miRNASeq.
+   Hay 2 directorios (tejido Normal y Tumoral) en cada uno de estos directorios; cada uno contiene un archivo de cuentas de RNASeq y otro de miRNASeq.
    
 - **Graphs (2 files)**  
    Carpeta **generada** con 2 archivos ".png".
