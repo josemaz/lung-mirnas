@@ -1,3 +1,34 @@
+###############################################################################
+##Get the Tissue Type (Adenocarcinoma or carcinoma form Scamous Cells)
+###############################################################################
+args = commandArgs(trailingOnly=TRUE)
+if (length(args)==0) {
+  stop("Execution: Rscript --vanilla R/02-PRE-QC.R (tissue type); tissue type: Adeno or Scamous", call.=FALSE)
+} 
+Tissue <- args[1] 
+if (Tissue == "Adeno"){
+  normalTissue <- "NAD"
+  cancerTissue <- "TAD"
+} else if (Tissue == "Scamous"){
+  normalTissue <- "NSC"
+  cancerTissue <- "TSC"  
+}
+###############################################################################
+##Get the Work and Data dir
+###############################################################################
+Sys.umask("003")
+RDATA <- "rdata"
+TISSUEDATA <- paste(RDATA, Tissue, sep="/")
+cat('Data directory: ', TISSUEDATA, '\n') #concatena e imprime
+
+PLOTSDIR <-paste(TISSUEDATA, "plots", sep="/")
+dir.create(PLOTSDIR)
+#PLOTSDIR <-paste(DATADIR, "plots", sep = "")
+PREDIR <- paste(PLOTSDIR, "QC_PRE", sep = "/")
+dir.create(PREDIR)
+###############################################################################
+##Usefull Libraries
+###############################################################################
 library("BiocParallel")
 library("NOISeq")
 
@@ -9,19 +40,12 @@ register(MulticoreParam(workers=detectCores()-1, progress=TRUE))
 cat("#################\n")
 cat("Step 2: QC\n")
 cat("#################\n")
-DATADIR <- "pipeline/"
-RDATA <- paste(DATADIR, "rdata", sep="")
-PLOTSDIR <-paste(DATADIR, "plots", sep="")
-dir.create(PLOTSDIR)
-#PLOTSDIR <-paste(DATADIR, "plots", sep = "")
-PREDIR <- paste(PLOTSDIR, "QC_PRE", sep = "/")
-dir.create(PREDIR)
+
 w <- 1024 #Resolucion de los plots
 h <- 1024  #Resolucion de los plots
 p <- 24   #Resolucion de los plots
 
-
-load(file=paste(RDATA, "RawFull.RData", sep="/"))
+load(file=paste(TISSUEDATA, "RawFull.RData", sep="/"))
 
 ##########################################
 ###Let's keep only the GC & length annotated genes
@@ -40,7 +64,7 @@ row.names(full$Targets)<-full$Targets$ID #El nombre de las filas ahora correspon
 full$Targets$Group<-factor(substr(full$Targets$ID, start=1, stop=3)) #subtr regresa NAD y TAD de NAD20 y TAD21, p.e.
 #En targets s crea un acolumna que indica si la muestra es de individuo sano o canceroso
 
-write.table(full$Targets, file=paste(RDATA, "Targets.tsv" , sep="/"), sep="\t", quote=FALSE, row.names=FALSE)
+write.table(full$Targets, file=paste(TISSUEDATA, "Targets.tsv" , sep="/"), sep="\t", quote=FALSE, row.names=FALSE)
 cat("Saving RawFull.RData... \n")
 save(full, file=paste(RDATA, "RawFull.RData", sep="/"), compress="xz")
 cat("RawFull.RData saved.\n")

@@ -10,7 +10,7 @@ cat("#################\n")
 cat("Step 3: Normalization\n")
 cat("#################\n")
 
-DATADIR <- 'pipeline/data/'
+DATADIR <- 'pipeline/'
 RDATA <- paste(DATADIR, "rdata", sep = "")
 PLOTSDIR <-paste(DATADIR, "plots", sep = "")
 w <- 1024
@@ -37,8 +37,9 @@ mean10 <- list(M=mean10$M[protein.coding, ], Annot=mean10$Annot[protein.coding, 
 rawM <- cbind(gene=as.character(mean10$Annot$EnsemblID), mean10$M)
 write.table(rawM, file=paste(RDATA, "raw.tsv", sep="/"), sep="\t", quote=FALSE, row.names=FALSE)
 
-cat("Saving Mean10_ProteinCoding.RData \n") 
+cat("Saving Mean10_ProteinCoding.RData...\n") 
 save(mean10, file=paste(RDATA, "Mean10_ProteinCoding.RData", sep="/"), compress="xz")
+cat("Saved.")
 
 ##########################################
 ## Normalization: GC, Lenght, Tmm
@@ -104,16 +105,10 @@ M <- as.data.frame(norm.data_cpm10_arsyn$M)
 M <- cbind(gene=as.character(norm.data_cpm10_arsyn$Annot$EnsemblID), M)
 
 #tumor samples
-Ctr <- as.data.frame(norm.data_cpm10_arsyn$M[,norm.data_cpm10_arsyn$Targets$Group == "Ctr"])
-Ctr <- cbind(gene=as.character(norm.data_cpm10_arsyn$Annot$EnsemblID), Ctr)
-St1 <- as.data.frame(norm.data_cpm10_arsyn$M[,norm.data_cpm10_arsyn$Targets$Group == "s1-"])
-St1 <- cbind(gene=as.character(norm.data_cpm10_arsyn$Annot$EnsemblID), St1)
-St2 <- as.data.frame(norm.data_cpm10_arsyn$M[,norm.data_cpm10_arsyn$Targets$Group == "s2-"])
-St2 <- cbind(gene=as.character(norm.data_cpm10_arsyn$Annot$EnsemblID), St2)
-St3 <- as.data.frame(norm.data_cpm10_arsyn$M[,norm.data_cpm10_arsyn$Targets$Group == "s3-"])
-St3 <- cbind(gene=as.character(norm.data_cpm10_arsyn$Annot$EnsemblID), St3)
-# St4 <- as.data.frame(norm.data_cpm10_arsyn$M[,norm.data_cpm10_arsyn$Targets$Group == "s4-"])
-# St4 <- cbind(gene=as.character(norm.data_cpm10_arsyn$Annot$EnsemblID), St3)
+NAD <- as.data.frame(norm.data_cpm10_arsyn$M[,norm.data_cpm10_arsyn$Targets$Group == "NAD"])
+NAD <- cbind(gene=as.character(norm.data_cpm10_arsyn$Annot$EnsemblID), NAD)
+TAD <- as.data.frame(norm.data_cpm10_arsyn$M[,norm.data_cpm10_arsyn$Targets$Group == "TAD"])
+TAD <- cbind(gene=as.character(norm.data_cpm10_arsyn$Annot$EnsemblID), TAD)
 
 #EnsemblIDs
 symbols <-as.character(norm.data_cpm10_arsyn$Annot$EnsemblID)
@@ -127,19 +122,16 @@ cat("Saving", paste(step1, step2, step3, "Norm_cpm10_genelist.txt", sep = "_"), 
 write.table(symbols, file = paste(RDATA, paste(step1, step2, step3, "Norm_cpm10_genelist.txt", sep = "_"), sep="/"), 
             sep="\t", quote=FALSE, row.names=FALSE, col.names=FALSE)
 
-cat("Saving", "norm-Control.tsv", "\n")
-write.table(Ctr, file =paste(RDATA,"norm-Control.tsv", sep="/"), sep="\t", quote=FALSE, row.names=FALSE)
-cat("Saving", "norm-Stage1.tsv", "\n")
-write.table(St1, file =paste(RDATA,"norm-Stage1.tsv", sep="/"), sep="\t", quote=FALSE, row.names=FALSE)
-cat("Saving", "norm-Stage2.tsv", "\n")
-write.table(St2, file =paste(RDATA,"norm-Stage2.tsv", sep="/"), sep="\t", quote=FALSE, row.names=FALSE)
-cat("Saving", "norm-Stage3.tsv", "\n")
-write.table(St3, file =paste(RDATA,"norm-Stage3.tsv", sep="/"), sep="\t", quote=FALSE, row.names=FALSE)
-# cat("Saving", "norm-Stage4.tsv", "\n")
-# write.table(St4, file =paste(RDATA,"norm-Stage4.tsv", sep="/"), sep="\t", quote=FALSE, row.names=FALSE)
+cat("Saving", "norm-NAD.tsv", "\n")
+write.table(NAD, file =paste(RDATA,"norm-NAD.tsv", sep="/"), sep="\t", quote=FALSE, row.names=FALSE)
+cat("File saved.")
+cat("Saving", "norm-TAD.tsv", "\n")
+write.table(TAD, file =paste(RDATA,"norm-TAD.tsv", sep="/"), sep="\t", quote=FALSE, row.names=FALSE)
+cat("File saved.")
 
 cat("Saving", "Norm_cpm10_arsyn.RData", "\n")
 save(norm.data_cpm10_arsyn, file=paste(RDATA,"Norm_cpm10_arsyn.RData", sep="/"), compress="xz")
+cat("File saved.")
 
 cat("End of normalization texting\n")
 
