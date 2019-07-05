@@ -49,7 +49,7 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
  - Python (3.7.3)
  - librerias python (matplotlib.pyplot, numpy, glob, pandas, json, requests, re, gzip, shutil)
  - R (3.6.0)
- - librerias R (BiocParallel, parallel, NOISeq, EDASeq)
+ - librerias R (BiocParallel, parallel, NOISeq, EDASeq, ggplot2, reshape2)
 
 ## Descarga de los datos (se usan los scripts de python)
    1. `bash sh/downdata.sh` [Descarga de datos de RNASeq y miRNASeq; Gráfica de miRNAs y de Archivos]
