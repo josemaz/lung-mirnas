@@ -36,9 +36,9 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
   
 - **R (4 files)**  
    Carpeta **fija** con 4 scripts.
-   - 01-Rectify_rnaSeq.R: Script para checar si las muestras tienen el mismo tamaño, checar si los genes mapean a posiciones, cambiar la anotación, remover aquellos genes mapeados a cromosomas no convencionales, remover aquellos genes que no tienen un símbolo y salvar la informacion!
-   - 02-PRE-QC.R: Script que hace un pre-control de calidad a los datos y genera plots.
-   - 03-NORM.R: Script para realizar la normalizacion de la información.
+   - 01-Rectify_rnaSeq.R: Script para checar si las muestras tienen el mismo tamaño, checar si los genes mapean a posiciones, cambiar la anotación, remover aquellos genes mapeados a cromosomas no convencionales, remover aquellos genes que no tienen un símbolo y salvar la información!
+   - 02-PRE-QC.R: Script que hace un pre-control de calidad a los datos y genera plots donde se muestra el biotipo tipo de genes obtenidos y valores de expresión.
+   - 03-NORM.R: Script para realizar la normalización de la información.
    - 04-POST-QC.R: Script que hace un post-control de calidad a los datos.
 
    
@@ -55,8 +55,11 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
    1. `bash sh/downdata.sh` [Descarga de datos de RNASeq y miRNASeq; Gráfica de miRNAs y de Archivos]
 
 ## Control de calidad y normalizacion (se usan los scripts de R)
-   1. `bash sh/DataProcess.sh` [Preprocesamiento de archivos, Pre-Control de Calidad, Plots, Normalización, Post-Control de Calidad]
+   1. `bash sh/DataProcess.sh` [Preprocesamiento de archivos, Pre-Control de Calidad, Plots, Normalización, Post-Control de Calidad]  
 
- 
+
+
+# Árbol de Directorios
+
  
 
