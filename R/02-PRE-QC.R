@@ -59,8 +59,8 @@ cat("Non GC and lenght annotated genes removed.\n")
 
 row.names(full$M)<-full$Annot$EnsemblID #Las cuentas te quedan organizaditas, el gen al que pertenecen, si son de sano o de enfermo y el numero de muestra
 row.names(full$Annot)<-full$Annot$EnsemblID #Ahora el numbre de las filas corresponde al ensembleID (lo tenemos 2 veces, una en el nombre de las filas y otra en la columna "esembleID")
-row.names(full$Targets)<-full$Targets$ID #El nombre de las filas ahora corresponde al ID (NAD1, TAD2, etc...)
-full$Targets$Group<-factor(substr(full$Targets$ID, start=1, stop=3)) #subtr regresa NAD y TAD de NAD20 y TAD21, p.e.
+row.names(full$Targets)<-full$Targets$ID #El nombre de las filas ahora corresponde al ID (normalTissue1, cancerTissue2, etc...)
+full$Targets$Group<-factor(substr(full$Targets$ID, start=1, stop=3)) #subtr regresa normalTissue y cancerTissue de NAD20 y TAD21, p.e.
 #En targets s crea un acolumna que indica si la muestra es de individuo sano o canceroso
 
 write.table(full$Targets, file=paste(RDATA, "Targets.tsv" , sep="/"), sep="\t", quote=FALSE, row.names=FALSE)
@@ -185,8 +185,8 @@ cat("PCA loading raw plot generated.\n")
 
 ## Score plot
 mycol <- as.character(full$Targets$Group)
-mycol[mycol == 'NAD'] <- "red2"
-mycol[mycol == 'TAD'] <- "blue1"
+mycol[mycol == normalTissue] <- "red2"
+mycol[mycol == cancerTissue] <- "blue1"
 # mycol[mycol == 's4-'] <- "cyan2"
 
 pdf(file=paste(PREDIR, "10-PCAScore_raw.pdf", sep="/"), width = 5*2, height = 5)
@@ -202,7 +202,7 @@ plot(pca.results$scores[,1:2], col = "white",
      ylim = range(pca.results$scores[,1:2]) + 0.02*rango*c(-1,1))
 points(pca.results$scores[,1], pca.results$scores[,2], col = mycol, cex = 1.5)  
 # legend("topright", c("NAD", "s1-", "s2-", "s3-", "s4-"), 
-legend("topright", c("NAD","TAD"), 
+legend("topright", c(normalTissue,cancerTissue), 
        # col = c("black", "red2", "blue1", "green2", "cyan2"), ncol = 2, pch = 1)
        col = c("red2", "blue1"), ncol = 2, pch = 1)
 
@@ -216,7 +216,7 @@ plot(pca.results$scores[,c(1,3)], col = "white",
      ylim = range(pca.results$scores[,c(1,3)]) + 0.02*rango2*c(-1,1))
 points(pca.results$scores[,1], pca.results$scores[,3], col = mycol, cex = 1.5)
 # legend("topright", c("NAD", "s1-", "s2-", "s3-", "s4-"), 
-legend("topright", c("NAD", "TAD"), 
+legend("topright", c(normalTissue, cancerTissue), 
        # col = c("black", "red2", "blue1", "green2", "cyan2"), ncol = 2, pch = 1)
        col = c("red2", "blue1"), ncol = 2, pch = 1)
 dev.off()

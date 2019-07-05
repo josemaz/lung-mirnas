@@ -3,7 +3,7 @@
 ###############################################################################
 args = commandArgs(trailingOnly=TRUE)
 if (length(args)==0) {
-  stop("Execution: Rscript --vanilla R/02-PRE-QC.R (tissue type); tissue type: Adeno or Squamous", call.=FALSE)
+  stop("Execution: Rscript --vanilla R/03-NORM.R (tissue type); tissue type: Adeno or Squamous", call.=FALSE)
 } 
 Tissue <- args[1] 
 if (Tissue == "Adeno"){

@@ -1,10 +1,27 @@
+###############################################################################
+##Get the Tissue Type (Adenocarcinoma or Squamous Cells carcinoma)  
+###############################################################################
+args = commandArgs(trailingOnly=TRUE)
+if (length(args)==0) {
+  stop("Execution: Rscript --vanilla R/04-POST-QC.R (tissue type); tissue type: Adeno or Squamous", call.=FALSE)
+} 
+Tissue <- args[1] 
+if (Tissue == "Adeno"){
+  normalTissue <- "NAD"
+  cancerTissue <- "TAD"
+} else if (Tissue == "Squamous"){
+  normalTissue <- "NSC"
+  cancerTissue <- "TSC"  
+}
+###############################################################################
+##Usefull Libraries
+###############################################################################
 library("NOISeq")
 library("ggplot2")
 library("reshape2")
-
-DATADIR <- 'pipeline/data/'
-RDATA <- paste(DATADIR, "rdata", sep = "")
-PLOTSDIR <-paste(DATADIR, "plots", sep = "")
+###############################################################################
+RDATA <- paste("Data",Tissue, "rdata", sep = "/")
+PLOTSDIR <-paste(RDATA, "plots", sep = "/")
 POSTDIR <- paste(PLOTSDIR, "QC_POST", sep = "/")
 dir.create(POSTDIR)
 w <- 1024
@@ -79,10 +96,9 @@ cat("PCA loading raw plot generated.\n")
 
 ## Score plot
 mycol <- as.character(norm.data_cpm10_arsyn$Targets$Group)
-mycol[mycol == 'Ctr'] <- "black"
-mycol[mycol == 's1-'] <- "red2"
-mycol[mycol == 's2-'] <- "blue1"
-mycol[mycol == 's3-'] <- "green2"
+mycol[mycol == normalTissue] <- "black"
+mycol[mycol == cancerTissue] <- "red2"
+
 # mycol[mycol == 's4-'] <- "cyan2"
 
 pdf(file=paste(POSTDIR, "07-PCAScore_raw.pdf", sep="/"), width = 5*2, height = 5)
@@ -98,9 +114,9 @@ plot(pca.results$scores[,1:2], col = "white",
      ylim = range(pca.results$scores[,1:2]) + 0.02*rango*c(-1,1))
 points(pca.results$scores[,1], pca.results$scores[,2], col = mycol, cex = 1.5)  
 # legend("topright", c("Ctr", "s1-", "s2-", "s3-", "s4-"), 
-legend("topright", c("Ctr", "s1-", "s2-", "s3-"), 
+legend("topright", c(normalTissue, cancerTissue), 
        # col = c("black", "red2", "blue1", "green2", "cyan2"), ncol = 2, pch = 1)
-       col = c("black", "red2", "blue1", "green2"), ncol = 2, pch = 1)
+       col = c("red2", "blue1"), ncol = 2, pch = 1)
 
 # PC1 & PC3
 rango2 = diff(range(pca.results$scores[,c(1,3)]))
@@ -112,9 +128,9 @@ plot(pca.results$scores[,c(1,3)], col = "white",
      ylim = range(pca.results$scores[,c(1,3)]) + 0.02*rango2*c(-1,1))
 points(pca.results$scores[,1], pca.results$scores[,3], col = mycol, cex = 1.5)
 # legend("topright", c("Ctr", "s1-", "s2-", "s3-", "s4-"), 
-legend("topright", c("Ctr", "s1-", "s2-", "s3-"), 
+legend("topright", c(normalTissue, cancerTissue), 
        # col = c("black", "red2", "blue1", "green2", "cyan2"), ncol = 2, pch = 1)
-       col = c("black", "red2", "blue1", "green2"), ncol = 2, pch = 1)
+       col = c("red2", "blue1"), ncol = 2, pch = 1)
 dev.off()
 cat("PCA scores raw plot generated.\n")
 
@@ -122,6 +138,6 @@ cat("PCA scores raw plot generated.\n")
 ##########################################################################
 ## GREAT JOB!!! YOU MADE IT TILL THE END!!!!
 ###########################################################################
-cat("#################\n")
+cat("####################################\n")
 cat("End of Step 4: Post Quality Control\n")
-cat("#################\n")
+cat("####################################\n")
