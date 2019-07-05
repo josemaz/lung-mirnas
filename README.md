@@ -35,7 +35,7 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
   
 - **R (4 files)**  
    Carpeta **fija** con 4 scripts.
-   - 01-Rectify_rnaSeq.R: Script para procesar la información.
+   - 01-Rectify_rnaSeq.R: Script para checar si las muestras tienen el mismo tamaño, checar si los genes mapean a posiciones, cambiar la anotación, remover aquellos genes mapeados a cromosomas no convencionales, remover aquellos genes que no tienen un símbolo y salvar la informacion!
    - 02-PRE-QC.R: Script que hace un pre-control de calidad a los datos y genera plots.
    - 03-NORM.R: Script para realizar la normalizacion de la información.
    - 04-POST-QC.R: Script que hace un post-control de calidad a los datos.
@@ -57,7 +57,7 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
    1. `Rscript --vanilla R/01-Rectify_rnaSeq.R Adeno` [Preprocesamiento de archivos]
    2. `Rscript --vanilla R/02-PRE-QC.R Adeno` [Control de calidad, graficas de los datos obtenidos]
    3. `Rscript --vanilla R/03-NORM.R Adeno` [Normalización]
-
+   1. `bash sh/DataProcess.sh` [Preprocesamiento de archivos, Pre-Control de Calidad, Plots, Normalización, Post-Control de Calidad]
 
  
  
