@@ -22,6 +22,7 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
    - qbyMIRNA.json: Script que ayudara a obtener los nombres de los archivos a descargar a partir de CaseID.
    
 - **pipeline (1 file)**  
+   Carpeta **fija** con 1 archivo.
    - biomart-20181212.txt: Archivo con la anotación de todos los genes de *Homo sapiens*, a partir de donde se mapearan los genes  obtenidos de los archivos de RNASeq. 
 
 - **py (6 files)**  
@@ -50,13 +51,10 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
  - R (3.6.0)
  - librerias R (BiocParallel, parallel, NOISeq, EDASeq)
 
-## Descarga de los datos (python)
+## Descarga de los datos (se usan los scripts de python)
    1. `bash sh/downdata.sh` [Descarga de datos de RNASeq y miRNASeq; Gráfica de miRNAs y de Archivos]
 
-## Control de calidad y normalizacion (R)
-   1. `Rscript --vanilla R/01-Rectify_rnaSeq.R Adeno` [Preprocesamiento de archivos]
-   2. `Rscript --vanilla R/02-PRE-QC.R Adeno` [Control de calidad, graficas de los datos obtenidos]
-   3. `Rscript --vanilla R/03-NORM.R Adeno` [Normalización]
+## Control de calidad y normalizacion (se usan los scripts de R)
    1. `bash sh/DataProcess.sh` [Preprocesamiento de archivos, Pre-Control de Calidad, Plots, Normalización, Post-Control de Calidad]
 
  
