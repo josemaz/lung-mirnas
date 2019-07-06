@@ -96,8 +96,8 @@ cat("PCA loading raw plot generated.\n")
 
 ## Score plot
 mycol <- as.character(norm.data_cpm10_arsyn$Targets$Group)
-mycol[mycol == normalTissue] <- "black"
-mycol[mycol == cancerTissue] <- "red2"
+mycol[mycol == normalTissue] <- "red2"
+mycol[mycol == cancerTissue] <- "blue1"
 
 # mycol[mycol == 's4-'] <- "cyan2"
 
