@@ -20,7 +20,7 @@ library("NOISeq")
 library("ggplot2")
 library("reshape2")
 ###############################################################################
-RDATA <- paste("Data",Tissue, "rdata", sep = "/")
+RDATA <- paste("Data",Tissue, "rdata", "RNA", sep = "/")
 PLOTSDIR <-paste(RDATA, "plots", sep = "/")
 POSTDIR <- paste(PLOTSDIR, "QC_POST", sep = "/")
 dir.create(POSTDIR)

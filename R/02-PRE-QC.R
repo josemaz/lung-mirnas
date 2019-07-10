@@ -17,7 +17,7 @@ if (Tissue == "Adeno"){
 ##Get the Work and Data dir
 ###############################################################################
 Sys.umask("003")
-RDATA <- paste("Data",Tissue, "rdata", sep = "/")
+RDATA <- paste("Data",Tissue, "rdata", "RNA", sep = "/")
 cat('Data directory: ', RDATA, '\n') #concatena e imprime
 
 PLOTSDIR <-paste(RDATA, "plots", sep="/")

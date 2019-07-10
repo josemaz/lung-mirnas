@@ -17,7 +17,11 @@ if (Tissue == "Adeno"){
 ##Get the Work and Data dir
 ###############################################################################
 Sys.umask("003")
-RDATA <- paste("Data",Tissue, "rdata", sep = "/")
+ALL_RDATA <- paste("Data",Tissue, "rdata", sep = "/")
+if (!file.exists(RDATA)){
+  dir.create(RDATA)
+}
+RDATA <- paste(ALL_RDATA, "RNA", sep = "/")
 if (!file.exists(RDATA)){
   dir.create(RDATA)
 }

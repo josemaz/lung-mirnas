@@ -28,7 +28,7 @@ cat("#####################\n")
 cat("Step 3: Normalization\n")
 cat("#####################\n")
 
-RDATA <- paste("Data",Tissue, "rdata", sep = "/")
+RDATA <- paste("Data",Tissue, "rdata", "RNA", sep = "/")
 PLOTSDIR <-paste(RDATA, "plots", sep = "/")
 w <- 1024
 h <- 1024
