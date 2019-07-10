@@ -51,13 +51,14 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
  - R (3.6.0)
  - librerias R (BiocParallel, parallel, NOISeq, EDASeq, ggplot2, reshape2)
 
-## Descarga de los datos (se usan los scripts de python)
+## Descarga de los datos (se usan scripts de python)
    1. `bash sh/downdata.sh` [Descarga de datos de RNASeq y miRNASeq; Gráfica de miRNAs y de Archivos]
 
-## Control de calidad y normalizacion (se usan los scripts de R)
-   1. `bash sh/DataProcess.sh` [Preprocesamiento de archivos, Pre-Control de Calidad, Plots, Normalización, Post-Control de Calidad]  
+## Control de calidad y normalizacion de RNA (se usan scripts de R)
+   1. `bash sh/RNAProcess.sh` [Preprocesamiento de archivos, Pre-Control de Calidad, Plots, Normalización, Post-Control de Calidad]  
 
-
+## Control de calidad de miRNAs (se usa script de R)
+   1. `bash sh/miRNAProcess.sh` [Preprocesamiento de archivos, ontrol de Calidad] 
 
 # Árbol de Directorios  
 Ir a archivo "three.md"
