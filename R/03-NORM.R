@@ -124,11 +124,12 @@ cat("\nGenerating data matrices with arsyn for Aracne...\n")
 M <- as.data.frame(norm.data_cpm10_arsyn$M)
 M <- cbind(gene=as.character(norm.data_cpm10_arsyn$Annot$EnsemblID), M)
 
+#healthy samples
+NAD_NSC <- as.data.frame(norm.data_cpm10_arsyn$M[,norm.data_cpm10_arsyn$Targets$Group == normalTissue])
+NAD_NSC <- cbind(gene=as.character(norm.data_cpm10_arsyn$Annot$EnsemblID), NAD_NSC)
 #tumor samples
-NAD <- as.data.frame(norm.data_cpm10_arsyn$M[,norm.data_cpm10_arsyn$Targets$Group == "NAD"])
-NAD <- cbind(gene=as.character(norm.data_cpm10_arsyn$Annot$EnsemblID), NAD)
-TAD <- as.data.frame(norm.data_cpm10_arsyn$M[,norm.data_cpm10_arsyn$Targets$Group == "TAD"])
-TAD <- cbind(gene=as.character(norm.data_cpm10_arsyn$Annot$EnsemblID), TAD)
+TAD_TSC <- as.data.frame(norm.data_cpm10_arsyn$M[,norm.data_cpm10_arsyn$Targets$Group == cancerTissue])
+TAD_TSC <- cbind(gene=as.character(norm.data_cpm10_arsyn$Annot$EnsemblID), TAD_TSC)
 
 #EnsemblIDs
 symbols <-as.character(norm.data_cpm10_arsyn$Annot$EnsemblID)
@@ -143,11 +144,11 @@ write.table(symbols, file = paste(RDATA, paste(step1, step2, step3, "Norm_cpm10_
             sep="\t", quote=FALSE, row.names=FALSE, col.names=FALSE)
 cat("arsyn data saved!\n")
 
-cat("\nSaving", "norm-NAD.tsv", "\n")
-write.table(NAD, file =paste(RDATA,"norm-NAD.tsv", sep="/"), sep="\t", quote=FALSE, row.names=FALSE)
+cat("\nSaving norm-", normalTissue, ".tsv", "\n")
+write.table(NAD_NSC, file =paste(RDATA, "/norm-", normalTissue, ".tsv", sep=""), sep="\t", quote=FALSE, row.names=FALSE)
 cat("File saved.\n")
-cat("Saving", "norm-TAD.tsv", "\n")
-write.table(TAD, file =paste(RDATA,"norm-TAD.tsv", sep="/"), sep="\t", quote=FALSE, row.names=FALSE)
+cat("\nSaving norm-", cancerTissue, ".tsv", "\n")
+write.table(TAD_TSC, file =paste(RDATA, "/norm-", cancerTissue, ".tsv", sep=""), sep="\t", quote=FALSE, row.names=FALSE)
 cat("File saved.\n")
 
 cat("\nSaving", "Norm_cpm10_arsyn.RData", "\n")

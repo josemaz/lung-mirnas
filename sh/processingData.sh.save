@@ -1,1 +1,0 @@
-Rscript --vanilla R/01-Rectify_rnaSeq.R Adeno
