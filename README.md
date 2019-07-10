@@ -55,10 +55,10 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
    1. `bash sh/downdata.sh` [Descarga de datos de RNASeq y miRNASeq; Gráfica de miRNAs y de Archivos]
 
 ## Control de calidad y normalizacion de RNA (se usan scripts de R)
-   1. `bash sh/RNAProcess.sh` [Preprocesamiento de archivos, Pre-Control de Calidad, Plots, Normalización, Post-Control de Calidad]  
+   1. `bash sh/RNA_DataProcess.sh` [Preprocesamiento de archivos, Pre-Control de Calidad, Plots, Normalización, Post-Control de Calidad]  
 
 ## Control de calidad de miRNAs (se usa script de R)
-   1. `bash sh/miRNAProcess.sh` [Preprocesamiento de archivos, ontrol de Calidad] 
+   1. `bash sh/miRNA_DataProcess.sh` [Preprocesamiento de archivos, ontrol de Calidad] 
 
 # Árbol de Directorios  
 Ir a archivo "three.md"
