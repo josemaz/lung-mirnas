@@ -60,5 +60,5 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
 
 
 # Árbol de Directorios  
-Ir a archivo "three.txt"
+Ir a archivo "three.md"
    
