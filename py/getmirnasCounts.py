@@ -24,8 +24,8 @@ two_mirnas = []
 three_mirnas = []
 number_mirnas = [cero_mirnas,one_mirnas,two_mirnas,three_mirnas]
 
-os.mkdir("Graphs")
-os.chdir("Graphs")
+os.mkdir("Plots")
+os.chdir("Plots")
 
 #We make the plot for every group
 i = 0
