@@ -18,8 +18,8 @@ if (Tissue == "Adeno"){
 ###############################################################################
 Sys.umask("003")
 ALL_RDATA <- paste("Data",Tissue, "rdata", sep = "/")
-if (!file.exists(RDATA)){
-  dir.create(RDATA)
+if (!file.exists(ALL_RDATA)){
+  dir.create(ALL_RDATA)
 }
 RDATA <- paste(ALL_RDATA, "RNA", sep = "/")
 if (!file.exists(RDATA)){
