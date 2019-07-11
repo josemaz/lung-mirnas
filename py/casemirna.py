@@ -23,7 +23,7 @@ elif filename == "TAD":
 elif filename == "NSC":
 	dirname = "Squamous"
 	dirname2 = "NSC"
-elif filename == "NSC":
+elif filename == "TSC":
 	dirname = "Squamous"
 	dirname2 = "TSC"
 
