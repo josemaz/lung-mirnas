@@ -9,9 +9,9 @@ do
 	echo
 	echo
 	echo "------------ Processing $i -------------"
-	python py/getcases.py -t $i
-	python py/casemirna.py -t $i
-	python py/downdata.py -t $i
+	python3 py/getcases.py -t $i
+	python3 py/casemirna.py -t $i
+	python3 py/downdata.py -t $i
 done
 
 echo
@@ -26,11 +26,11 @@ echo '########################################'
 
 echo
 echo "Graph showing the amount of miRNAs by RNA for each Tissue Type is being generated..."
-python py/getmirnasCounts.py
+python3 py/getmirnasCounts.py
 echo "Done; File saved in Graphs/"
 
 echo
 echo "Graph showing the number of retrieved files is being generated..."
-python py/file_number.py
+python3 py/file_number.py
 echo "Done; File saved in Graphs/"
 echo
