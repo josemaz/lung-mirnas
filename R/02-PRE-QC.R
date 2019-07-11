@@ -20,8 +20,12 @@ Sys.umask("003")
 RDATA <- paste("Data",Tissue, "rdata", "RNA", sep = "/")
 cat('Data directory: ', RDATA, '\n') #concatena e imprime
 
-PLOTSDIR <-paste(RDATA, "plots", sep="/")
+PLOTSDIR <-paste("Plots", Tissue, sep="/")
 dir.create(PLOTSDIR)
+
+PLOTSDIR <-paste(PLOTSDIR, "RNA", sep="/")
+dir.create(PLOTSDIR)
+
 #PLOTSDIR <-paste(DATADIR, "plots", sep = "")
 PREDIR <- paste(PLOTSDIR, "QC_PRE", sep = "/")
 dir.create(PREDIR)

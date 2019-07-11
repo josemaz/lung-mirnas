@@ -21,7 +21,7 @@ library("ggplot2")
 library("reshape2")
 ###############################################################################
 RDATA <- paste("Data",Tissue, "rdata", "RNA", sep = "/")
-PLOTSDIR <-paste(RDATA, "plots", sep = "/")
+PLOTSDIR <-paste("Plots", Tissue, "RNA", sep="/")
 POSTDIR <- paste(PLOTSDIR, "QC_POST", sep = "/")
 dir.create(POSTDIR)
 w <- 1024
