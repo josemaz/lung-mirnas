@@ -57,7 +57,7 @@ plt.legend()
 
 plt.tight_layout()
 
-os.chdir("Graphs")
+os.chdir("Plots")
 #plt.show()
 plt.savefig("no_files.png")
 os.chdir("..")
