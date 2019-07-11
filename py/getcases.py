@@ -63,7 +63,7 @@ elif filename == "NSC":
 	dirname = "Squamous"
 	os.mkdir("Data/Squamous/NSC")
 	dirname2 = "NSC"
-elif filename == "NSC":
+elif filename == "TSC":
 	dirname = "Squamous"
 	os.mkdir("Data/Squamous/TSC")
 	dirname2 = "TSC"
