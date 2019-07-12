@@ -5,7 +5,7 @@ echo '########### Preprocessing miRNA Data ###############'
 echo '####################################################'
 echo
 
-Rscript --vanilla R/miRNA-Normaliza.R Adeno
+Rscript --vanilla R/miRNA-Normalize.R Adeno
 Rscript --vanilla R/miRNA-Normalize.R Squamous
 
 echo
