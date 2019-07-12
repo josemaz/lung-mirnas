@@ -15,7 +15,7 @@ do
 done
 
 echo
-echo "Done; Files saved in Data/"
+echo "Done; Files saved in Data/(Adeno|Squamous)/(NAD|TAD|NSC|TSC)"
 
 echo
 echo
@@ -27,10 +27,10 @@ echo '########################################'
 echo
 echo "Graph showing the amount of miRNAs by RNA for each Tissue Type is being generated..."
 python3 py/getmirnasCounts.py
-echo "Done; File saved in Graphs/"
+echo "Done; File saved in Plots/"
 
 echo
 echo "Graph showing the number of retrieved files is being generated..."
 python3 py/file_number.py
-echo "Done; File saved in Graphs/"
+echo "Done; File saved in Plots/"
 echo
