@@ -17,12 +17,12 @@ if step == "1" and os.path.exists("Data/Adeno/NAD/miRNA/index.txt") and os.path.
 elif step == "1":
 	print("\nSomething went wrong on STEP 1.\nPlease verify you have acomplished the previous step.\n")
 
-if step == "2" and os.path.exists("Plots/Squamous/RNA/QC_POST/07-PCAScore_raw.pdf"):
+if step == "2" and os.path.exists("Plots/Adeno/RNA/QC_POST/07-PCAScore_raw.pdf") and os.path.exists("Plots/Squamous/RNA/QC_POST/07-PCAScore_raw.pdf"):
 	print("\nSTEP 2 Done succesfully!\n¡Everything ready for STEP 3: miRNA Quality Control!\n")
 elif step == "2":
 	print("\nSomething went wrong on STEP 2.\nPlease verify you have acomplished the previous step.\n")
 
-if step == "3" and os.path.exists("Data/Squamous/rdata/miRNA/Targets.tsv"):
+if step == "3" and os.path.exists("Data/Adeno/rdata/miRNA/Targets.tsv") and os.path.exists("Data/Squamous/rdata/miRNA/Targets.tsv"):
 	print("\nSTEP 3 Done succesfully!\n")
 elif step == "3":
 	print("\nSomething went wrong on STEP 3.\nPlease verify you have acomplished the previous step.\n")
