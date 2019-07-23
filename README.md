@@ -60,6 +60,9 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
 ## Control de calidad de miRNAs (se usa script de R)
    1. `bash sh/miRNA_DataProcess.sh` [Preprocesamiento de archivos, Control de Calidad] 
 
+## Generacion de Matrices de Expresion
+   1. `Rscript R/EM_RNA_miRNA_generator.R`
+
 # Árbol de Directorios  
 Ir a archivo "three.md"
    
