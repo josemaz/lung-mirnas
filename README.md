@@ -12,7 +12,7 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
    Hay 2 directorios (tejido Normal y Tumoral) en cada uno de estos directorios; cada uno contiene un archivo de cuentas de RNASeq y otro de miRNASeq.
    
 - **Plots (2 files and 2 directories)**  
-   Carpeta **generada** con 2 archivos ".png". Tiene 2 directorios: "Adeno" & "Squamous", cada uno con los plots generados antes y del control de calidad.
+   Carpeta **generada**. Contiene 2 archivos ".png" y 2 directorios: "Adeno" & "Squamous", cada uno con los plots generados antes y después del control de calidad.
    - no_mirnas_ALL.png: Gráfica de cantidad de miRNAs por RNA de los 4 tipos de tejido.
    - no_files.png: Gráfica de cantidad de archivos descargados de RNASeq y de miRNASeq de los 4 tipos de tejido.
 
