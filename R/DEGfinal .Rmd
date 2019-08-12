@@ -1,0 +1,191 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# DEG de Cancer de pulmon
+
+
+ Librerias a instalar 
+```{r include=FALSE}
+library("NOISeq")
+library("EDASeq")
+library("limma")
+library("ggplot2")
+library("reshape2")
+library("grid")
+library("gplots")
+library("edgeR")
+library("Glimma")
+load(file = "/home/niebla/Documents/Analisis exploratorio all-20181113T235619Z-001/Analisis exploratorio all/Norm_cpm10_arsyn.RData")
+setwd("~/Documents/Analisis exploratorio all-20181113T235619Z-001/Analisis exploratorio all/DEG/TSCdeg/")
+```
+
+Separar los datos normalizados en dos listas de AD y SC
+```{r}
+
+anots <- read.delim(file = "/home/niebla/Documents/Analisis exploratorio all-20181113T235619Z-001/Analisis exploratorio all/mart_export.txt")
+cosa <- norm.data_cpm10_arsyn$Annot
+mix <- merge(x=cosa, y=anots, by.x="EnsemblID", by.y="Gene.stable.ID", all.x=FALSE, all.y=FALSE, all=FALSE)
+which(duplicated(mix$EnsemblID))
+mix <- mix[-19581,]
+norm.data_cpm10_arsyn$Annot <- data.frame(mix)
+rownames(norm.data_cpm10_arsyn$M) <- norm.data_cpm10_arsyn$Annot$HGNC.symbol
+remove(anots, cosa)
+
+NSC <- norm.data_cpm10_arsyn$M[,norm.data_cpm10_arsyn$Targets$Group == "NSC"]
+TSC <- norm.data_cpm10_arsyn$M[,norm.data_cpm10_arsyn$Targets$Group == "TSC"]
+M <- cbind(NSC, TSC)
+Group <- factor(substr(colnames(M), start = 1, stop = 3))
+targets <- data.frame(ID = colnames(M), Group = Group)
+SC <- list(M = cpm(M, log = TRUE), Targets = targets)
+```
+
+Disenio del experimento y ajustes
+```{r}
+design <- model.matrix(~1+Group, data = SC$Targets)
+rownames(design) <- SC$Targets$ID
+M <- SC$M
+row.names(M) <- norm.data_cpm10_arsyn$Annot$EnsemblID
+fit <- lmFit(M, design)
+head(fit$coefficients)
+fit2 <- eBayes(fit)
+fit2$fdr<-apply(fit2$"p.value", 2, p.adjust, method="fdr")
+p<-ggplot(as.data.frame(fit$coefficients), aes(x=GroupTSC))+geom_density()
+pdf(file="SC_LFCDensity.pdf")
+p
+dev.off()
+nrow(M)
+```
+
+eBayes
+```{r}
+alphas <- c(0.05, 10^(-2:-10), 10^(seq(-20, -200, by=-10)))
+degCount<-sapply(alphas, function(alpha){
+  table(fit2$fdr[,"GroupTSC"]<alpha)
+})
+colnames(degCount)<-alphas
+degCount<-as.data.frame(t(degCount))
+degCount$alpha<-alphas
+degCount$Noise<-alphas*nrow(M)
+degCount
+pdf(file="SC_vennDiagram.pdf")
+vennDiagram(decideTests(fit2, adjust.method="fdr", p.value=1e-100))
+dev.off()
+```
+
+Ahora con TREAT
+```{r}
+lfc<-seq(0, 10, by=0.5)
+B <- 5
+fitTreat<-lapply(lfc, function(x){
+  ##Ajustando el modelo
+  aux<-treat(fit, lfc=x)
+  aux$fdr<-apply(aux$"p.value", 2, p.adjust, method="fdr")
+  ##Estadistico B
+  p<-1-aux$fdr[, "GroupTSC"] ##Probabilidad de salir diferencialºº
+  aux$B<-log(p/(1-p))
+  ##Diferenciales
+  aux$dif<-data.frame(
+    alpha=alphas,
+    lfc=rep(x, length(alphas)),
+    Dif=t(sapply(alphas, function(alpha){
+      table(factor(aux$fdr[,"GroupTSC"]<alpha & (aux$B>5), levels=c(TRUE, FALSE)))
+    })),
+    Noise=alphas*nrow(M)
+  )
+   
+  return(aux)
+})
+names(fitTreat)<-paste("lfc", lfc, sep="")
+difTreat<-do.call(rbind, lapply(fitTreat, function(x){x$dif}))
+head(difTreat)
+```
+
+Graficas
+```{r}
+main<-ggplot(difTreat, aes(x=alpha, y=Dif.TRUE, group=lfc)) + geom_line() + facet_grid(. ~ lfc)
+main<- main + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_x_log10()
+main<- main + geom_hline(aes(yintercept=1000), color="red") + geom_hline(aes(yintercept=2000), color="blue")
+pdf(file="DifGenes.pdf")
+main
+dev.off()
+
+subplot<- main %+% subset(difTreat, lfc == 2) 
+pdf(file="Subplot.pdf")
+subplot
+dev.off()
+
+pdf(file="DifComplete.pdf")
+vp <- viewport(width=0.7, height=0.5, x=1, y=0.42, just = c("right", "bottom"))
+print(main)
+print(subplot, vp = vp)
+dev.off()
+```
+
+Buscar por lfc = 2 y glimmaplot
+```{r}
+fitTreat$lfc2$deg<-fitTreat$lfc2$fdr[,"GroupTSC", drop=FALSE]<0.01 & (fitTreat$lfc2$B>5)
+table(fitTreat$lfc2$deg)
+dt <- decideTests(fitTreat$lfc2)
+#La ocupamos despues para pintar las redes y por eso la guardamos...
+write.table(dt, file = "dt.txt", quote = FALSE, sep = "\t", row.names = TRUE, col.names = FALSE )
+summary(dt)
+glMDPlot(fitTreat$lfc2, counts = SC$M, groups = SC$Targets$Group, status = dt, anno = mix, display.columns = c("HGNC.symbol", "EnsemblID"))
+```
+
+Comprobando supuestos a nivel global
+```{r}
+ajustados<-fitTreat$lfc2$coefficients%*%t(design)
+residuos<-M-ajustados
+pdf(file="AD2_supuestos.pdf")
+ggplot(melt(as.data.frame(residuos)),aes(x=value))+geom_density()
+dev.off()
+pdf(file="AD20_QQresiduos.pdf")
+qqnorm(as.numeric(residuos))
+qqline(as.numeric(residuos), col = 2)
+dev.off()
+
+testResult<-apply(residuos, 1, shapiro.test)
+testResult<-as.data.frame(do.call(rbind,testResult))
+testResult$data.name<-NULL
+table(unlist(testResult$p.value)<0.001)
+
+table(unlist(testResult$p.value[fitTreat$lfc2$deg[, "GroupTSC"]])<0.001)
+
+#Inpeccion de genes
+idResiduo<-which(fitTreat$lfc2$deg[, "GroupTSC"])[10]
+pdf(file="AD20_ResiduoGen10.pdf")
+qqnorm(residuos[idResiduo,])
+qqline(residuos[idResiduo,],col="red")
+dev.off()
+```
+
+Heatmap de diferenciales. Si son muchas muestras, el heatmap se observa sobresaturado
+```{r}
+pdf(file="SC20_Heatmap Enfermo vs sanos.pdf",  width=14, height=14)
+heatmap.2(scale(t(M[fitTreat$lfc0$deg[, "GroupTSC"], ])), col=bluered, scale="none", trace="none", 
+    main = "Enfermos vs Sanos = 775 genes")
+dev.off()
+```
+
+Salida
+```{r}
+genesFULL<-cbind(
+  mix, 
+  Coef=fitTreat$lfc2$coefficients,
+  Diff=fitTreat$lfc2$deg[, "GroupTSC"], 
+  "p.value"=do.call(cbind, lapply(fitTreat, function(x){x$"p.value"[, "GroupTSC"]})),
+  FDR=do.call(cbind, lapply(fitTreat, function(x){x$fdr[, "GroupTSC"]})), 
+  B=do.call(cbind, lapply(fitTreat, function(x){
+    ##Estadistico B
+    p<-1-x$fdr[, "GroupTSC"] ##Probabilidad de salir diferencial
+    B<-log(p/(1-p))
+    return(B)
+  })),
+  Exp=fitTreat$lfc2$coefficients%*%t(unique(design)))
+
+head(genesFULL)
+write.table(genesFULL, file = "TSCdegs.txt", col.names = TRUE, quote = FALSE, row.names = FALSE)
+```
