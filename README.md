@@ -4,10 +4,10 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
 ## Contenido de Carpetas
 
 - **Database (4 files)**    
-   Esta carpeta es **fija** y contine los archivos originales (manifest) de los diferentes tipos de tejido de cancer de pulmón (NAD.txt, TAD.txt, NSC.txt, TSC,txt).
+   Esta carpeta es **fija** y contiene los archivos originales (manifest) de los diferentes tipos de tejido de cancer de pulmón (NAD.txt, TAD.txt, NSC.txt, TSC,txt).
 
 - **Data (2 directories)**  
-   Carpeta **generada**. Contiene 2 directorios: "Adeno" & "Squamous", que contienen toda la informacion porducida de estos dos  grupos de tejido. 
+   Carpeta **generada**. Contiene 2 directorios: "Adeno" & "Squamous", que contienen toda la información producida de estos dos grupos de tejido. 
      
    Hay 2 directorios (tejido Normal y Tumoral) en cada uno de estos directorios; cada uno contiene un archivo de cuentas de RNASeq y otro de miRNASeq.
    
@@ -19,20 +19,20 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
 - **json (2 files)**  
    Carpeta **fija** con 2 scripts.
    - qbyfileid.json: Script para hacer el query a "The Cancer Genome Atlas" (TCGA) y obtener los CaseID a partir de los archivos manifest.
-   - qbyMIRNA.json: Script que ayudara a obtener los nombres de los archivos a descargar a partir de CaseID.
+   - qbyMIRNA.json: Script que ayudará a obtener los nombres de los archivos a descargar a partir de CaseID.
    
 - **pipeline (1 file)**  
    Carpeta **fija** con 1 archivo.
-   - biomart-20181212.txt: Archivo con la anotación de todos los genes de *Homo sapiens*, a partir de donde se mapearan los genes  obtenidos de los archivos de RNASeq. 
+   - biomart-20181212.txt: Archivo con la anotación de todos los genes de *Homo sapiens*, a partir de donde se mapearán los genes obtenidos de los archivos de RNASeq. 
 
 - **py (6 files)**  
    Carpeta **fija** con 6 scripts.
-   - Util.py: Libreria creada para la descarga de información.
+   - Util.py: Librería creada para la descarga de información.
    - casemirna.py: Script para obtener rnaseq_fid, cantidad de mirnas, mirna_fname y el mirna_fid a partir de los CaseID
-   - downdata.py: Script para bajar archivos de cuentas de RNASeq y de miRNASeq y dentro de crapetas, ademas crear un archivo llamado "index.txt" con un listado de tosos los archivos descargados.   
-   - file_number.txt: Script para saber el numero de archivos de raw counts se tienen tanto de RNASeq como de miRNASeq y hacer graficas  
+   - downdata.py: Script para bajar archivos de cuentas de RNASeq y de miRNASeq y dentro de carpetas, además de crear un archivo llamado "index.txt" con un listado de todos los archivos descargados.   
+   - file_number.txt: Script para saber el número de archivos de raw counts se tienen tanto de RNASeq como de miRNASeq y hacer gráficas  
    - getcases.py: Script para obtener los caseID a partir de archivos manifest
-   - getmirnasCounts.py: Script para graficar el numero de miRNAs de NAD,TAD,NSC y de TSC
+   - getmirnasCounts.py: Script para graficar el número de miRNAs de NAD,TAD,NSC y de TSC
   
 - **R (4 files)**  
    Carpeta **fija** con 4 scripts.
@@ -47,20 +47,20 @@ Proyecto para procesar RNAseq y miRNAs para cáncer de pulmón.
 
 ## Prerrequistos
  - Python (3.7.3)
-   - librerias: matplotlib.pyplot, numpy, glob, pandas, json, requests, re, gzip, shutil
+   - librerías: matplotlib.pyplot, numpy, glob, pandas, json, requests, re, gzip, shutil
  - R (3.6.0)
-   - librerias: BiocParallel, parallel, NOISeq, EDASeq, ggplot2, reshape2
+   - librerías: BiocParallel, parallel, NOISeq, EDASeq, ggplot2, reshape2
 
 ## Descarga de los datos (se usan scripts de python)
    1. `bash sh/downdata.sh` [Descarga de datos de RNASeq y miRNASeq; Gráfica de miRNAs y de Archivos]
 
-## Control de calidad y normalizacion de RNA (se usan scripts de R)
+## Control de calidad y normalización de RNA (se usan scripts de R)
    1. `bash sh/RNA_DataProcess.sh` [Preprocesamiento de archivos, Pre-Control de Calidad, Plots, Normalización, Post-Control de Calidad]  
 
 ## Control de calidad de miRNAs (se usa script de R)
    1. `bash sh/miRNA_DataProcess.sh` [Preprocesamiento de archivos, Control de Calidad] 
 
-## Generación de Matrices de Expresion Genes+miRNAs por Tejido
+## Generación de Matrices de Expresión Genes+miRNAs por Tejido
    1. `Rscript R/EM_RNA_miRNA_generator.R`
 
 # Árbol de Directorios  
